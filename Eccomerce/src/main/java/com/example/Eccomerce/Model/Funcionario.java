@@ -1,5 +1,13 @@
 package com.example.Eccomerce.Model;
 
-public class Funcionario {
+import javax.persistence.Entity;
+
+@Entity
+public class Funcionario extends Usuario {
+	
+	private String departamento;
+	
+	
+	
 
 }
