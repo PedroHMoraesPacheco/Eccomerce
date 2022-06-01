@@ -38,7 +38,7 @@ public class Cliente{
 	
 	@Column(name = "Data de Nascimento", nullable = false, length = 20)
 	@Temporal(TemporalType.DATE)
-	private Date data;
+	private Date dataDeNascimento;
 
 	@NotEmpty
 	@NotNull
@@ -60,7 +60,7 @@ public class Cliente{
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
-		this.data = data;
+		this.dataDeNascimento = data;
 		this.endereco = endereco;
 		this.cliente = usuario;
 	}
@@ -94,11 +94,11 @@ public class Cliente{
 	}
 
 	public Date getData() {
-		return data;
+		return dataDeNascimento;
 	}
 
 	public void setData(Date data) {
-		this.data = data;
+		this.dataDeNascimento = data;
 	}
 
 	public Endereco getEndereco() {

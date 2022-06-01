@@ -13,7 +13,7 @@ public class ClienteService {
 
 	@Autowired
 	ClienteRepository clienteRepo;
-	
+
 	public List<Cliente> RetorneTodos(){
 		return clienteRepo.findAll();
 	}
@@ -31,8 +31,8 @@ public class ClienteService {
 		 	if (novaCliente.getNome() != null) {
 				ClienteVelho.setNome(novaCliente.getNome());
 			}
-			if (novaCliente.getEmail() != null  ) {
-				ClienteVelho.setEmail(novaCliente.getEmail());
+			if (novaCliente.getUsuario().getEmail() != null  ) {
+				ClienteVelho.getUsuario().setEmail(novaCliente.getUsuario().getEmail());
 			}
 			if (novaCliente.getEndereco() != null) {
 				ClienteVelho.setEndereco(novaCliente.getEndereco());
@@ -43,8 +43,8 @@ public class ClienteService {
 			if (novaCliente.getTelefone() != null) {
 				ClienteVelho.setTelefone(novaCliente.getTelefone());
 			}
-			if (novaCliente.getUsername() != null) {
-				ClienteVelho.setUsername(novaCliente.getUsername());
+			if (novaCliente.getUsuario().getUsername() != null) {
+				ClienteVelho.getUsuario().setUsername(novaCliente.getUsuario().getUsername());
 			}
 			return clienteRepo.save(ClienteVelho);
 	}
