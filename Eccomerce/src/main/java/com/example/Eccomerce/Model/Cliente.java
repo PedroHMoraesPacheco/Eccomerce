@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,7 +17,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Cliente")
-public class Cliente {
+public class Cliente{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,20 +28,6 @@ public class Cliente {
 	@Column(name = "Nome", nullable = false)
 	private String nome;
 	
-	@NotEmpty
-	@NotNull
-	@Column(name = "Email", nullable = false)
-	private String email;
-	
-	@NotEmpty
-	@NotNull
-	@Column(name = "Username", nullable = false)
-	private String username;
-	
-	@NotEmpty
-	@NotNull
-	@Column(name = "Senha", nullable = false)
-	private String senha;
 	@NotEmpty
 	@NotNull
 	@Column(name = "CPF", nullable = false)
@@ -57,23 +45,29 @@ public class Cliente {
 	@Column(name = "Endereço", nullable = false)
 	private Endereco endereco;
 	
+	@OneToOne
+	@JoinColumn(name = "Conta_id")
+	private User usuario;
+	
 	public Cliente() {
 		super();
 	}
 
-	public Cliente(Integer id, @NotEmpty @NotNull String nome, @NotEmpty @NotNull String email,
-			@NotEmpty @NotNull String username, @NotEmpty @NotNull String senha, @NotEmpty @NotNull String cpf,
-			String telefone, Date data) {
+	
+
+	public Cliente(Integer id, @NotEmpty @NotNull String nome, @NotEmpty @NotNull String cpf, String telefone,
+			Date data, @NotEmpty @NotNull Endereco endereco, User usuario) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.email = email;
-		this.username = username;
-		this.senha = senha;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.data = data;
+		this.endereco = endereco;
+		this.usuario = usuario;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -85,30 +79,6 @@ public class Cliente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public String getCpf() {
