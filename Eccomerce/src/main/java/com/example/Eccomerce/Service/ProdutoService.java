@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.Eccomerce.Exception.ProdutoExisteException;
 import com.example.Eccomerce.Model.Produto;
-import com.example.Eccomerce.Repository.ProdutoRepositorio;
+import com.example.Eccomerce.Repository.ProdutoRepository;
 
 import br.com.serratec.Exceptions.ProdutoJaExisteException;
 import br.com.serratec.Exceptions.ProdutoNaoEcontradoException;
@@ -15,7 +15,7 @@ import br.com.serratec.Exceptions.ProdutoNaoEcontradoException;
 public class ProdutoService {
 
 	@Autowired
-	ProdutoRepositorio repositorio;
+	ProdutoRepository repositorio;
 	
 	public List<Produto> listarTudo() {
 		return repositorio.findAll();
