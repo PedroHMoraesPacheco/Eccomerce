@@ -110,11 +110,11 @@ public class Cliente{
 	}
 
 	public User getUsuario() {
-		return usuario;
+		return cliente;
 	}
 
 	public void setUsuario(User usuario) {
-		this.usuario = usuario;
+		this.cliente = usuario;
 	}
 	
 }

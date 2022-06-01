@@ -23,6 +23,66 @@ public class Funcionario {
 	@OneToOne
 	@JoinColumn(name = "Funcionario_id")
 	private User funcionario;
+
+	public Funcionario(Integer id, String nome, String cpf, String telefone, Date dataDeNascimento, User funcionario) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.telefone = telefone;
+		this.dataDeNascimento = dataDeNascimento;
+		this.funcionario = funcionario;
+	}
+
+	public Funcionario() {
+		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Date getDataDeNascimento() {
+		return dataDeNascimento;
+	}
+
+	public void setDataDeNascimento(Date dataDeNascimento) {
+		this.dataDeNascimento = dataDeNascimento;
+	}
+
+	public User getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(User funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+	
+	
 	
 	
 }
