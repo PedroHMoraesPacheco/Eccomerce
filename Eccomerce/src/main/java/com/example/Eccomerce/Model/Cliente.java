@@ -47,13 +47,11 @@ public class Cliente{
 	
 	@OneToOne
 	@JoinColumn(name = "Conta_id")
-	private User usuario;
+	private User cliente;
 	
 	public Cliente() {
 		super();
 	}
-
-	
 
 	public Cliente(Integer id, @NotEmpty @NotNull String nome, @NotEmpty @NotNull String cpf, String telefone,
 			Date data, @NotEmpty @NotNull Endereco endereco, User usuario) {
@@ -64,10 +62,8 @@ public class Cliente{
 		this.telefone = telefone;
 		this.data = data;
 		this.endereco = endereco;
-		this.usuario = usuario;
+		this.cliente = usuario;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -111,6 +107,14 @@ public class Cliente{
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public User getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
 	}
 	
 }
