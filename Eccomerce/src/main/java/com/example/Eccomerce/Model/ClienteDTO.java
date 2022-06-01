@@ -21,9 +21,9 @@ public class ClienteDTO {
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
-		this.email = obj.getEmail();
-		this.username = obj.getUsername();
-		this.senha = obj.getSenha();
+		this.email = obj.getUsuario().getEmail();
+		this.username = obj.getUsuario().getUsername();
+		this.senha = obj.getUsuario().getSenha();
 		this.cpf = obj.getCpf();
 		this.telefone = obj.getTelefone();
 		this.data = obj.getData();
