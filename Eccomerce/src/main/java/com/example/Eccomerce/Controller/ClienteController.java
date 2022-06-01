@@ -23,7 +23,6 @@ public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
 	
-	
 		@GetMapping
 		public List<ClienteDTO> getTodos(){
 			List<Cliente> list=clienteService.RetorneTodos();

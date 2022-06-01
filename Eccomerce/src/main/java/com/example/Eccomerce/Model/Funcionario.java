@@ -23,6 +23,9 @@ public class Funcionario {
 	@OneToOne
 	@JoinColumn(name = "Funcionario_id")
 	private User funcionario;
+	
+	@OneToOne(mappedBy="funcionario_Produto")
+	private Produto produto;
 
 	public Funcionario(Integer id, String nome, String cpf, String telefone, Date dataDeNascimento, User funcionario) {
 		super();

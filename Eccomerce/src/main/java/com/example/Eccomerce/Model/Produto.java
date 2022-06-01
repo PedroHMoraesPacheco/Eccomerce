@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.swing.text.html.HTML;
 
 @Entity
@@ -13,7 +16,7 @@ public class Produto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Integer id;
 	
 	private String nome;
 	
@@ -25,18 +28,22 @@ public class Produto {
 	
 	private LocalDate DataCadastroProduto;
 	
-	private String categoria_id;
-	
 	private HTML imagem;
 	
-	private String funcionario_id;
+	@OneToOne
+	@JoinColumn(name="categoria_id")
+	private Categoria categoria_Produto;
+
+	@ManyToOne
+	@JoinColumn(name="funcionario_id")
+	private Funcionario funcionario_Produto;
 
 	public Produto() {
 		super();
 	}
 
-	public Produto(String id, String nome, String descricao, Double preco, Integer quantidadeEstoque,
-			LocalDate dataCadastroProduto, String categoria_id, HTML imagem, String funcionario_id) {
+	public Produto(Integer id, String nome, String descricao, Double preco, Integer quantidadeEstoque,
+			LocalDate dataCadastroProduto, HTML imagem, Categoria categoria_Produto, Funcionario funcionario_Produto) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -44,17 +51,13 @@ public class Produto {
 		this.preco = preco;
 		QuantidadeEstoque = quantidadeEstoque;
 		DataCadastroProduto = dataCadastroProduto;
-		this.categoria_id = categoria_id;
 		this.imagem = imagem;
-		this.funcionario_id = funcionario_id;
+		this.categoria_Produto = categoria_Produto;
+		this.funcionario_Produto = funcionario_Produto;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -97,14 +100,6 @@ public class Produto {
 		DataCadastroProduto = dataCadastroProduto;
 	}
 
-	public String getCategoria_id() {
-		return categoria_id;
-	}
-
-	public void setCategoria_id(String categoria_id) {
-		this.categoria_id = categoria_id;
-	}
-
 	public HTML getImagem() {
 		return imagem;
 	}
@@ -113,19 +108,12 @@ public class Produto {
 		this.imagem = imagem;
 	}
 
-	public String getFuncionario_id() {
-		return funcionario_id;
+	public Funcionario getFuncionario_Produto() {
+		return funcionario_Produto;
 	}
 
-	public void setFuncionario_id(String funcionario_id) {
-		this.funcionario_id = funcionario_id;
+	public void setFuncionario_Produto(Funcionario funcionario_Produto) {
+		this.funcionario_Produto = funcionario_Produto;
 	}
-
-
-
-
-
-
- 
-
+	
 }

@@ -27,7 +27,7 @@ public class ProdutoService {
 		return repositorio.findAll();
 	}
 	
-	public Produto listarProduto(String id) throws ProdutoNaoEcontradoException {
+	public Produto listarProduto(Integer id) throws ProdutoNaoEcontradoException {
 		Optional<Produto> optional = repositorio.findById(id);
 		if (optional.isEmpty()) {
 			throw new ProdutoNaoEcontradoException("O Produto não foi encontrado!");
@@ -47,7 +47,7 @@ public class ProdutoService {
 		repositorio.save(produto);
 	}
 	
-	public void deletarProduto(String id) throws ProdutoNaoEcontradoException {
+	public void deletarProduto(Integer id) throws ProdutoNaoEcontradoException {
 		Optional<Produto> optional = repositorio.findById(id);
 		if (optional.isEmpty()) {
 			throw new ProdutoNaoEcontradoException("O Produto não foi encontrado!");
