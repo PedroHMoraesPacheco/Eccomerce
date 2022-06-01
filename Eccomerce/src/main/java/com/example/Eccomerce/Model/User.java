@@ -39,6 +39,9 @@ public class User {
 	@OneToOne(mappedBy="usuario")
 	private Cliente cliente;
 	
+	@OneToOne(mappedBy="usuario")
+	private Funcionario funcionario;
+	
 	public User() {
 		super();
 	}
