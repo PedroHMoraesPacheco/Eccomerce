@@ -27,19 +27,19 @@ public class FuncionarioController {
 			@GetMapping
 			public List<FuncionarioDTO> getTodos(){
 				List<Funcionario> list=funcionarioService.retorneTODOS();
-				List<FuncionarioDTO> listDTO = list.stream().map(obj -> new FuncionarioDTO()).collect(Collectors.toList());
+				List<FuncionarioDTO> listDTO = list.stream().map(obj -> new FuncionarioDTO(obj)).collect(Collectors.toList());
 				return listDTO;
 			}
 			
 			@GetMapping("/{id}")
 			public FuncionarioDTO findByid(@PathVariable Integer id){
-				FuncionarioDTO novaDTO = new FuncionarioDTO();
+				FuncionarioDTO novaDTO = new FuncionarioDTO(funcionarioService.funcionarioByID(id));
 				return novaDTO;
 			}
 			@PostMapping("/{id}")
 			public FuncionarioDTO newFuncionario(@RequestBody Funcionario funcionario){ 
 				funcionarioService.newFuncionario(funcionario);
-				FuncionarioDTO novaDTO = new FuncionarioDTO();
+				FuncionarioDTO novaDTO = new FuncionarioDTO(funcionario);
 				return novaDTO;
 			}
 			@DeleteMapping("/{id}")
@@ -49,7 +49,7 @@ public class FuncionarioController {
 			@PutMapping("/{id}")
 			public FuncionarioDTO changeById(@PathVariable Integer id, @RequestBody Funcionario funcionario){
 				funcionarioService.changeById(id, funcionario);
-				FuncionarioDTO novaDTO = new FuncionarioDTO();
+				FuncionarioDTO novaDTO = new FuncionarioDTO(funcionario);
 				return novaDTO;
 			}
 
