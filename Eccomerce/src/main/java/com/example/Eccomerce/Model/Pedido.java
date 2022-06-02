@@ -1,9 +1,9 @@
 package com.example.Eccomerce.Model;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Pedido {
@@ -19,10 +22,19 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotBlank
 	private Integer numeroPedido;
+	
+	@NotBlank
 	private Double valorTotal;
+
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@Column(name = "data_pedido")
 	private LocalDate dataPedido;
-	private Date dataEntrega;
+	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@Column(name = "data_entrega")
+	private LocalDate dataEntrega;
 	private String status;
 
 	@ManyToOne
@@ -39,7 +51,7 @@ public class Pedido {
 
 	
 
-	public Pedido(Integer id, Integer numeroPedido, Double valorTotal, LocalDate dataPedido, Date dataEntrega,
+	public Pedido(Integer id, Integer numeroPedido, Double valorTotal, LocalDate dataPedido, LocalDate dataEntrega,
 			String status, Cliente cliente_id, Funcionario funcionario_id, List<Produtos_Pedidos> produtoPedido) {
 		super();
 		this.id = id;
@@ -76,11 +88,11 @@ public class Pedido {
 		this.dataPedido = dataPedido;
 	}
 
-	public Date getDataEntrega() {
+	public LocalDate getDataEntrega() {
 		return dataEntrega;
 	}
 
-	public void setDataEntrega(Date dataEntrega) {
+	public void setDataEntrega(LocalDate dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
 
