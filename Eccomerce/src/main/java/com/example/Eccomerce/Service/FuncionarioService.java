@@ -26,7 +26,7 @@ public class FuncionarioService {
 		repositorio.deleteById(id);
 	}
 	
-	public void Post(Funcionario funcionario) {
+	public void newFuncionario(Funcionario funcionario) {
 		repositorio.save(funcionario);
 	}
 	
@@ -49,5 +49,6 @@ public class FuncionarioService {
            }
            return repositorio.save(FuncionarioVelho);
    }
+	
 }
 
