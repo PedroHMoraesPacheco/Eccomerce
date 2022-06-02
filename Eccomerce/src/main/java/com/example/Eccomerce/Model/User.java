@@ -6,11 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class User {
+@Table(name="Usuario") 
+public class User{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

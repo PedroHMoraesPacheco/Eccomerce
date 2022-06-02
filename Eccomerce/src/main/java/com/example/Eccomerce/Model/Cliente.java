@@ -34,12 +34,12 @@ public class Cliente{
 	@Column(name = "Telefone")
 	private String telefone;
 	
-	@Column(name = "Data de Nascimento")
+	@Column(name = "Data_de_Nascimento")
 	@Temporal(TemporalType.DATE)
 	private Date dataDeNascimento;
 	
 	@OneToOne
-	@JoinColumn(name = "Conta_id")
+	@JoinColumn(name = "cliente_id_User")
 	private User cliente;
 	
 	@OneToMany(mappedBy = "cliente_id")
@@ -71,10 +71,6 @@ public class Cliente{
 
 	public String getCpf() {
 		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 
 	public String getTelefone() {

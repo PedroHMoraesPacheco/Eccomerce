@@ -24,8 +24,6 @@ public class Categoria {
 		super();
 	}
 
-	
-
 	public Categoria(Integer id, String nome, String descricao, List<Produto> produto) {
 		super();
 		this.id = id;

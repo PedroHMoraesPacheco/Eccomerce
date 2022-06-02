@@ -86,8 +86,4 @@ public class Funcionario {
 	public String getCpf() {
 		return cpf;
 	}
-	
-	
-	
-	
 }
