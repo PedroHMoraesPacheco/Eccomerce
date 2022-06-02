@@ -31,6 +31,7 @@ public class Pedido {
 
 	@OneToMany(mappedBy = "pedido_id")
 	private List<Produtos_Pedidos> produtoPedido;
+	
 
 	public Pedido() {
 		super();
@@ -39,7 +40,7 @@ public class Pedido {
 	
 
 	public Pedido(Integer id, Integer numeroPedido, Double valorTotal, LocalDate dataPedido, Date dataEntrega,
-			String status, Cliente cliente_id, List<Produtos_Pedidos> produtoPedido) {
+			String status, Cliente cliente_id, Funcionario funcionario_id, List<Produtos_Pedidos> produtoPedido) {
 		super();
 		this.id = id;
 		this.numeroPedido = numeroPedido;
@@ -113,7 +114,9 @@ public class Pedido {
 
 	public void setCliente_id(Cliente cliente_id) {
 		this.cliente_id = cliente_id;
-	}		
-	
+	}
+
+
+
 	
 }
