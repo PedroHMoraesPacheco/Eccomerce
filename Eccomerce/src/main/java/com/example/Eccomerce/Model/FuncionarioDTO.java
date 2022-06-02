@@ -12,17 +12,16 @@ public class FuncionarioDTO {
 	private String telefone;
 	private Date data;
 	
-	public FuncionarioDTO(Integer id, String nome, String email, String username, String senha, String cpf,
-			String telefone, Date data) {
+	public FuncionarioDTO(Funcionario obj) {
 		super();
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.username = username;
-		this.senha = senha;
-		this.cpf = cpf;
-		this.telefone = telefone;
-		this.data = data;
+		this.id = obj.getId();
+		this.nome = obj.getNome();
+		this.email = obj.getFuncionario().getEmail();
+		this.username = obj.getFuncionario().getUsername();
+		this.senha = obj.getFuncionario().getSenha();
+		this.cpf = obj.getCpf();
+		this.telefone = obj.getTelefone();
+		this.data = obj.getDataDeNascimento();
 	}
 
 	public FuncionarioDTO() {
