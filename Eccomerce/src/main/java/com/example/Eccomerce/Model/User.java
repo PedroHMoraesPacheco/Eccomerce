@@ -36,10 +36,10 @@ public class User {
 	@Column(name = "Role", nullable = false)
 	private String role;
 
-	@OneToOne(mappedBy="usuario")
+	@OneToOne(mappedBy="cliente")
 	private Cliente cliente;
 	
-	@OneToOne(mappedBy="usuario")
+	@OneToOne(mappedBy="funcionario")
 	private Funcionario funcionario;
 	
 	public User() {
@@ -47,21 +47,15 @@ public class User {
 	}
 
 	public User(Integer id, @NotEmpty @NotNull String username, @NotEmpty @NotNull String email,
-			@NotEmpty @NotNull String senha, @NotEmpty @NotNull String role) {
+			@NotEmpty @NotNull String senha, @NotEmpty @NotNull String role, Cliente cliente, Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.senha = senha;
 		this.role = role;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+		this.cliente = cliente;
+		this.funcionario = funcionario;
 	}
 
 	public String getUsername() {
@@ -95,7 +89,26 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
 	
 }

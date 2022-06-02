@@ -2,6 +2,7 @@ package com.example.Eccomerce.Model;
 
 import java.util.Date;
 
+
 public class ClienteDTO {
 	private Integer id;
 	private String nome;
@@ -11,7 +12,6 @@ public class ClienteDTO {
 	private String cpf;
 	private String telefone;
 	private Date data;
-	private Endereco endereco;
 	
 	public ClienteDTO() {
 		super();
@@ -21,13 +21,12 @@ public class ClienteDTO {
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
-		this.email = obj.getUsuario().getEmail();
-		this.username = obj.getUsuario().getUsername();
-		this.senha = obj.getUsuario().getSenha();
+		this.email = obj.getCliente().getEmail();
+		this.username = obj.getCliente().getUsername();
+		this.senha = obj.getCliente().getSenha();
 		this.cpf = obj.getCpf();
 		this.telefone = obj.getTelefone();
-		this.data = obj.getData();
-		this.endereco = obj.getEndereco();
+		this.data = obj.getDataDeNascimento();
 	}
 
 	public Integer getId() {
@@ -92,14 +91,6 @@ public class ClienteDTO {
 
 	public void setData(Date data) {
 		this.data = data;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 	
 }

@@ -1,13 +1,14 @@
 package com.example.Eccomerce.Model;
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.swing.text.html.HTML;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Produto {
@@ -26,22 +27,24 @@ public class Produto {
 	
 	private LocalDate DataCadastroProduto;
 	
-	private HTML imagem;
 	
-	@OneToOne
-	@JoinColumn(name="categoria_id")
+	@ManyToOne
+	@JoinColumn(name="categoria_id", referencedColumnName="id")
 	private Categoria categoria_Produto;
 
 	@ManyToOne
 	@JoinColumn(name="funcionario_id")
 	private Funcionario funcionario_Produto;
+	
+	@OneToMany(mappedBy = "produto_id")
+	private List<Produtos_Pedidos> produtoPedido;
 
 	public Produto() {
 		super();
 	}
 
 	public Produto(Integer id, String nome, String descricao, Double preco, Integer quantidadeEstoque,
-			LocalDate dataCadastroProduto, HTML imagem, Categoria categoria_Produto, Funcionario funcionario_Produto) {
+			LocalDate dataCadastroProduto, Categoria categoria_Produto, Funcionario funcionario_Produto) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -49,7 +52,6 @@ public class Produto {
 		this.preco = preco;
 		QuantidadeEstoque = quantidadeEstoque;
 		DataCadastroProduto = dataCadastroProduto;
-		this.imagem = imagem;
 		this.categoria_Produto = categoria_Produto;
 		this.funcionario_Produto = funcionario_Produto;
 	}
@@ -96,14 +98,6 @@ public class Produto {
 
 	public void setDataCadastroProduto(LocalDate dataCadastroProduto) {
 		DataCadastroProduto = dataCadastroProduto;
-	}
-
-	public HTML getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(HTML imagem) {
-		this.imagem = imagem;
 	}
 
 	public Funcionario getFuncionario_Produto() {

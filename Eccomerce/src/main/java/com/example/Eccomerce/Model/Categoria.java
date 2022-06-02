@@ -1,10 +1,13 @@
 package com.example.Eccomerce.Model;
 
+import java.util.List;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Categoria {
 
 	@Id
@@ -15,19 +18,23 @@ public class Categoria {
 	private String descricao;
 	
 	@OneToMany(mappedBy ="categoria_Produto")
-	private Produto produto;
+	private List<Produto> produto;
 
 	public Categoria() {
 		super();
 	}
 
-	public Categoria(Integer id, String nome, String descricao, Produto produto) {
+	
+
+	public Categoria(Integer id, String nome, String descricao, List<Produto> produto) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.produto = produto;
 	}
+
+
 
 	public String getNome() {
 		return nome;
@@ -45,18 +52,20 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
-	public Produto getProduto() {
+
+	public List<Produto> getProduto() {
 		return produto;
 	}
 
-	public void setProduto(Produto produto) {
+
+
+	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
+
+
 
 	public Integer getId() {
 		return id;
 	}
-	
-	
-	
 }

@@ -31,20 +31,17 @@ public class ClienteService {
 		 	if (novaCliente.getNome() != null) {
 				ClienteVelho.setNome(novaCliente.getNome());
 			}
-			if (novaCliente.getUsuario().getEmail() != null  ) {
-				ClienteVelho.getUsuario().setEmail(novaCliente.getUsuario().getEmail());
+			if (novaCliente.getCliente().getEmail() != null  ) {
+				ClienteVelho.getCliente().setEmail(novaCliente.getCliente().getEmail());
 			}
-			if (novaCliente.getEndereco() != null) {
-				ClienteVelho.setEndereco(novaCliente.getEndereco());
-			}
-			if (novaCliente.getData() != null) {
-				ClienteVelho.setData(novaCliente.getData());
+			if (novaCliente.getDataDeNascimento() != null) {
+				ClienteVelho.setDataDeNascimento(novaCliente.getDataDeNascimento());
 			}
 			if (novaCliente.getTelefone() != null) {
 				ClienteVelho.setTelefone(novaCliente.getTelefone());
 			}
-			if (novaCliente.getUsuario().getUsername() != null) {
-				ClienteVelho.getUsuario().setUsername(novaCliente.getUsuario().getUsername());
+			if (novaCliente.getCliente().getUsername() != null) {
+				ClienteVelho.getCliente().setUsername(novaCliente.getCliente().getUsername());
 			}
 			return clienteRepo.save(ClienteVelho);
 	}

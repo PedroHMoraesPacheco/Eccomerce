@@ -1,12 +1,14 @@
 package com.example.Eccomerce.Model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -24,8 +26,8 @@ public class Funcionario {
 	@JoinColumn(name = "Funcionario_id")
 	private User funcionario;
 	
-	@OneToOne(mappedBy="funcionario_Produto")
-	private Produto produto;
+	@OneToMany(mappedBy="funcionario_Produto")
+	private List<Produto> produto;
 
 	public Funcionario(Integer id, String nome, String cpf, String telefone, Date dataDeNascimento, User funcionario) {
 		super();
