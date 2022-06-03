@@ -20,22 +20,22 @@ public class User{
 	
 	@NotEmpty
 	@NotNull
-	@Column(name = "Username", nullable = false)
+	@Column(name = "Username")
 	private String username;
 	
 	@NotEmpty
 	@NotNull
-	@Column(name = "Email", nullable = false)
+	@Column(name = "Email")
 	private String email;
 	
 	@NotEmpty
 	@NotNull
-	@Column(name = "Senha", nullable = false)
+	@Column(name = "Senha")
 	private String senha;
 	
 	@NotEmpty
 	@NotNull
-	@Column(name = "Role", nullable = false)
+	@Column(name = "Role")
 	private String role;
 
 	@OneToOne(mappedBy="cliente")

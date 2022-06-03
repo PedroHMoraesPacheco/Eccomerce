@@ -1,5 +1,6 @@
 package com.example.Eccomerce.Controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,13 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Eccomerce.Model.Cliente;
 import com.example.Eccomerce.Model.ClienteDTO;
+import com.example.Eccomerce.Model.EnderecoDTO;
 import com.example.Eccomerce.Service.ClienteService;
+import com.example.Eccomerce.Service.EnderecoService;
 
 @RestController
-@RequestMapping("/Cliente")
+@RequestMapping("/cliente")
 public class ClienteController {
+	
 	@Autowired
 	ClienteService clienteService;
+	
+	@Autowired
+	EnderecoService enderecoService;
 	
 		@GetMapping
 		public List<ClienteDTO> getTodos(){
@@ -35,20 +42,28 @@ public class ClienteController {
 			ClienteDTO novaDTO = new ClienteDTO(clienteService.findClienteByid(id));
 			return novaDTO;
 		}
+		
 		@PostMapping("/{id}")
 		public ClienteDTO newCliente(@RequestBody Cliente novaCliente){ 
 			clienteService.newCliente(novaCliente);
 			ClienteDTO novaDTO = new ClienteDTO(novaCliente);
 			return novaDTO;
 		}
+		
 		@DeleteMapping("/{id}")
 		public void deleteById(@PathVariable Integer id){
 			clienteService.deleteById(id);
 		}
+		
 		@PutMapping("/{id}")
 		public ClienteDTO changeById(@PathVariable Integer id, @RequestBody Cliente novaCliente){
 			clienteService.changeById(id, novaCliente);
 			ClienteDTO novaDTO = new ClienteDTO(novaCliente);
+			return novaDTO;
+		}
+		@PostMapping("/{cep}")
+		public EnderecoDTO newEndereco(@PathVariable String cep, @PathVariable Integer id ) throws IOException{ 
+			EnderecoDTO novaDTO = new EnderecoDTO(enderecoService.getEnderecoByCep(cep, id));
 			return novaDTO;
 		}
 }

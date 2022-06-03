@@ -39,11 +39,14 @@ public class Cliente{
 	private Date dataDeNascimento;
 	
 	@OneToOne
-	@JoinColumn(name = "cliente_id_User")
+	@JoinColumn(name = "cliente_id")
 	private User cliente;
 	
 	@OneToMany(mappedBy = "cliente_id")
 	private List<Pedido> pedidos;
+	
+	@OneToOne(mappedBy = "cliente_id")
+	private Endereco endereco;
 	
 	public Cliente() {
 		super();

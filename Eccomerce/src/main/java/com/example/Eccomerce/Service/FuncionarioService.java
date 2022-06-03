@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Eccomerce.Model.Funcionario;
-import com.example.Eccomerce.Repository.RepositoryFuncionario;
+import com.example.Eccomerce.Repository.FuncionarioRepository;
 
 @Service
 public class FuncionarioService {
 	
 	@Autowired
-	RepositoryFuncionario repositorio;
+	FuncionarioRepository repositorio;
 	
 	public List<Funcionario> retorneTODOS() {
 		return repositorio.findAll();
