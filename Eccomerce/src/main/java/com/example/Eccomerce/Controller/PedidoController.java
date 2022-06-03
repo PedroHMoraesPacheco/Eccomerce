@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Eccomerce.DTO.PedidoDTO;
 import com.example.Eccomerce.Exception.PedidoExisteException;
 import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
+import com.example.Eccomerce.Model.Pedido;
 import com.example.Eccomerce.Service.PedidoService;
 
 @RestController
@@ -26,12 +27,12 @@ public class PedidoController {
 	PedidoService service;
 
 	@GetMapping("{numeroPedido}")
-	public PedidoDTO getOne(@PathVariable Integer numeroPedido) throws PedidoNaoEcontradoException {
+	public Pedido getOne(@PathVariable Integer numeroPedido) throws PedidoNaoEcontradoException {
 		return service.listarPedido(numeroPedido);
 	}
 
 	@PutMapping("/{numeroPedido}")
-	public PedidoDTO update(@RequestBody PedidoDTO pedido, @PathVariable Integer numeroPedido)
+	public Pedido update(@RequestBody Pedido pedido, @PathVariable Integer numeroPedido)
 			throws PedidoNaoEcontradoException, PedidoExisteException {
 		return service.editarPedido(pedido, numeroPedido);
 	}
@@ -42,7 +43,7 @@ public class PedidoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> insert(@RequestBody PedidoDTO pedido) throws PedidoExisteException {
+	public ResponseEntity<?> insert(@RequestBody Pedido pedido) throws PedidoExisteException {
 		service.criarPedido(pedido);
 
 		return new ResponseEntity<>(HttpStatus.CREATED);

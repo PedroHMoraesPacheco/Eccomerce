@@ -18,23 +18,19 @@ public class User{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotEmpty
-	@NotNull
+	
 	@Column(name = "Username")
 	private String username;
 	
-	@NotEmpty
-	@NotNull
+	
 	@Column(name = "Email")
 	private String email;
 	
-	@NotEmpty
-	@NotNull
+	
 	@Column(name = "Senha")
 	private String senha;
 	
-	@NotEmpty
-	@NotNull
+	
 	@Column(name = "Role")
 	private String role;
 
@@ -48,8 +44,8 @@ public class User{
 		super();
 	}
 
-	public User(Integer id, @NotEmpty @NotNull String username, @NotEmpty @NotNull String email,
-			@NotEmpty @NotNull String senha, @NotEmpty @NotNull String role, Cliente cliente, Funcionario funcionario) {
+	public User(Integer id,  String username, String email,
+			 String senha,  String role, Cliente cliente, Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.username = username;

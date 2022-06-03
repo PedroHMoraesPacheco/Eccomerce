@@ -112,6 +112,22 @@ public class Cliente{
 		return id;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	
 	
 }

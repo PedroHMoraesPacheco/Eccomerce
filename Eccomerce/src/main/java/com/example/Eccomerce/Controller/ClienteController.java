@@ -19,6 +19,7 @@ import com.example.Eccomerce.DTO.EnderecoDTO;
 import com.example.Eccomerce.Model.Cliente;
 import com.example.Eccomerce.Service.ClienteService;
 import com.example.Eccomerce.Service.EnderecoService;
+import com.example.Eccomerce.Service.UserService;
 
 @RestController
 @RequestMapping("/cliente")
@@ -27,27 +28,23 @@ public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
 	
-	@Autowired
-	EnderecoService enderecoService;
-	
 		@GetMapping
 		public List<ClienteDTO> getTodos(){
 			List<Cliente> list=clienteService.RetorneTodos();
 			List<ClienteDTO> listDTO = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
 			return listDTO;
 		}
-		
+	
 		@GetMapping("/{id}")
 		public ClienteDTO findByid(@PathVariable Integer id){
 			ClienteDTO novaDTO = new ClienteDTO(clienteService.findClienteByid(id));
 			return novaDTO;
 		}
 		
-		@PostMapping("/{id}")
-		public ClienteDTO newCliente(@RequestBody Cliente novaCliente){ 
-			clienteService.newCliente(novaCliente);
-			ClienteDTO novaDTO = new ClienteDTO(novaCliente);
-			return novaDTO;
+		@PostMapping()
+		public ClienteDTO newCliente(@RequestBody ClienteDTO novaDto){
+			clienteService.TransformaDto(novaDto, clienteService.PutUserClienteDto(novaDto));
+			return novaDto;
 		}
 		
 		@DeleteMapping("/{id}")
@@ -56,14 +53,8 @@ public class ClienteController {
 		}
 		
 		@PutMapping("/{id}")
-		public ClienteDTO changeById(@PathVariable Integer id, @RequestBody Cliente novaCliente){
-			clienteService.changeById(id, novaCliente);
-			ClienteDTO novaDTO = new ClienteDTO(novaCliente);
-			return novaDTO;
-		}
-		@PostMapping("/{cep}")
-		public EnderecoDTO newEndereco(@PathVariable String cep, @PathVariable Integer id ) throws IOException{ 
-			EnderecoDTO novaDTO = new EnderecoDTO(enderecoService.getEnderecoByCep(cep, id));
+		public ClienteDTO changeById(@PathVariable Integer id, @RequestBody ClienteDTO novaCliente){
+			ClienteDTO novaDTO= new ClienteDTO(clienteService.PutByDTO(id, novaCliente));
 			return novaDTO;
 		}
 }

@@ -9,7 +9,9 @@ import java.net.URLConnection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import com.example.Eccomerce.DTO.EnderecoDTO;
 import com.example.Eccomerce.Model.Endereco;
 import com.example.Eccomerce.Repository.EnderecoRepository;
 import com.google.gson.Gson;
@@ -19,10 +21,8 @@ public class EnderecoService {
 	
 	@Autowired
 	EnderecoRepository enderecoRepo;
-	
 	@Autowired
 	ClienteService clienteService;
-	
 	public List<Endereco> listarTudo() {
 		return enderecoRepo.findAll();
 	}
@@ -43,29 +43,19 @@ public class EnderecoService {
 		
 		Endereco novoEndereco= new Endereco();
 		
-		//VIACEP
-		URL url = new URL("https://viacep.com.br/ws/"+cep+"/json/");
-		URLConnection connection = url.openConnection();
-		InputStream is =connection.getInputStream();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+		String fullUrl = "https://viacep.com.br/ws/"+cep+"/json";
+		RestTemplate restTemplate = new RestTemplate();
+		Endereco enderecoAux = restTemplate.getForObject(fullUrl, Endereco.class);
 		
-		String viacep="";
-		StringBuilder jsonCep=new StringBuilder();
-		
-		while((viacep= br.readLine())!=null) {
-			jsonCep.append(viacep);
-		}
-		//
-		
-		Endereco enderecoAux= new Gson().fromJson(jsonCep.toString(), Endereco.class);
-		
+		System.out.println(enderecoAux);
 		novoEndereco.setCep(enderecoAux.getCep());
 		novoEndereco.setLogradouro(enderecoAux.getLogradouro());
 		novoEndereco.setBairro(enderecoAux.getBairro());
 		novoEndereco.setCidade(enderecoAux.getCidade());
-		novoEndereco.setNumero(enderecoAux.getNumero());
-		novoEndereco.setComplemento(enderecoAux.getComplemento());
 		novoEndereco.setEstado(enderecoAux.getEstado());
+		
+		novoEndereco.setCliente_id(clienteService.findClienteByid(id));
+		
 		enderecoRepo.save(novoEndereco);
 		return novoEndereco;
 	}

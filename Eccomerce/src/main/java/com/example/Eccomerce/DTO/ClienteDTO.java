@@ -2,11 +2,19 @@ package com.example.Eccomerce.DTO;
 
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import com.example.Eccomerce.Model.Cliente;
 
 
 public class ClienteDTO {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
 	private String email;
 	private String username;
@@ -14,6 +22,7 @@ public class ClienteDTO {
 	private String cpf;
 	private String telefone;
 	private Date data;
+	private String role;
 	
 	public ClienteDTO() {
 		super();
@@ -29,6 +38,7 @@ public class ClienteDTO {
 		this.cpf = obj.getCpf();
 		this.telefone = obj.getTelefone();
 		this.data = obj.getDataDeNascimento();
+		this.role="Cliente";
 	}
 
 	public Integer getId() {
@@ -93,6 +103,14 @@ public class ClienteDTO {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }
