@@ -38,7 +38,7 @@ public class EnderecoController {
 		return novaDTO;
 	}
 	
-	@PostMapping("/{cep}")
+	@PostMapping("/{cep}/{id}")
 	public EnderecoDTO newEndereco(@PathVariable String cep,@PathVariable Integer id ) throws IOException{ 
 		EnderecoDTO novaDTO = new EnderecoDTO(enderecoService.getEnderecoByCep(cep,id));
 		return novaDTO;

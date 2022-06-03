@@ -29,7 +29,7 @@ public class Endereco {
 	private String localidade;
 	
 	@Column(name = "Numero")
-	private String siafi;
+	private String numero;
 	
 	@Column(name = "Complemento")
 	private String complemento;
@@ -45,7 +45,7 @@ public class Endereco {
 		super();
 	}
 
-	public Endereco(Integer id, String cep, String logradouro, String bairro, String localidade, String siafi,
+	public Endereco(Integer id, String cep, String logradouro, String bairro, String localidade, String numero,
 			String complemento, String uf, Cliente cliente_id) {
 		super();
 		this.id = id;
@@ -53,10 +53,18 @@ public class Endereco {
 		this.logradouro = logradouro;
 		this.bairro = bairro;
 		this.localidade = localidade;
-		this.siafi = siafi;
+		this.numero = numero;
 		this.complemento = complemento;
 		this.uf = uf;
 		this.cliente_id = cliente_id;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCep() {
@@ -92,11 +100,11 @@ public class Endereco {
 	}
 
 	public String getNumero() {
-		return siafi;
+		return numero;
 	}
 
-	public void setNumero(String siafi) {
-		this.siafi = siafi;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 	public String getComplemento() {
@@ -123,8 +131,5 @@ public class Endereco {
 		this.cliente_id = cliente_id;
 	}
 
-	public Integer getId() {
-		return id;
-	}
 	
 }

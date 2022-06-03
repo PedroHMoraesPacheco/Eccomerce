@@ -1,11 +1,16 @@
 package com.example.Eccomerce.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Eccomerce.DTO.ClienteDTO;
+import com.example.Eccomerce.DTO.EnderecoDTO;
 import com.example.Eccomerce.Model.Cliente;
+import com.example.Eccomerce.Model.Endereco;
+import com.example.Eccomerce.Model.User;
 import com.example.Eccomerce.Repository.ClienteRepository;
 
 @Service
@@ -13,6 +18,9 @@ public class ClienteService {
 
 	@Autowired
 	ClienteRepository clienteRepo;
+	
+	@Autowired
+	UserService userService;
 	
 	public List<Cliente> RetorneTodos(){
 		return clienteRepo.findAll();
@@ -44,5 +52,51 @@ public class ClienteService {
 				ClienteVelho.getCliente().setUsername(novaCliente.getCliente().getUsername());
 			}
 			return clienteRepo.save(ClienteVelho);
+	}
+	
+	public Cliente TransformaDto(ClienteDTO velhoDto, User usuario) {
+		Cliente novoCliente = new Cliente();
+		novoCliente.setCliente(usuario);
+		novoCliente.setNome(velhoDto.getNome());
+		novoCliente.setTelefone(velhoDto.getTelefone());
+		novoCliente.setCpf(velhoDto.getCpf());
+		novoCliente.setDataDeNascimento(velhoDto.getData());
+		novoCliente.getCliente().setEmail(velhoDto.getEmail());
+		novoCliente.getCliente().setSenha(velhoDto.getSenha());
+		novoCliente.getCliente().setUsername(velhoDto.getUsername());
+		novoCliente.getCliente().setRole(velhoDto.getRole());
+		
+		clienteRepo.save(novoCliente);
+		return novoCliente;
+	}
+	public Cliente PutByDTO(Integer id,ClienteDTO novoCliente) {
+		Cliente velhoCliente=findClienteByid(id);
+		if(novoCliente.getNome()!=null) {
+			velhoCliente.setNome(novoCliente.getNome());
+		}
+		if(novoCliente.getTelefone()!=null) {
+			velhoCliente.setTelefone(novoCliente.getTelefone());
+		}
+		if(novoCliente.getCpf()!=null) {
+			velhoCliente.setCpf(novoCliente.getCpf());
+		}
+		if(novoCliente.getData()!=null) {
+			velhoCliente.setDataDeNascimento(novoCliente.getData());
+		}
+		if(novoCliente.getEmail()!=null) {
+			velhoCliente.getCliente().setEmail(novoCliente.getEmail());
+		}
+		if(novoCliente.getUsername()!=null) {
+			velhoCliente.getCliente().setUsername(novoCliente.getUsername());
+		}
+		if(novoCliente.getSenha()!=null) {
+			velhoCliente.getCliente().setSenha(novoCliente.getSenha());
+		}
+		clienteRepo.save(velhoCliente);
+		return velhoCliente;
+	}
+
+	public User PutUserClienteDto(ClienteDTO clienteDto) {
+		return userService.TransformaUserClienteDto(clienteDto);
 	}
 }
