@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Eccomerce.PedidoDTO;
+import com.example.Eccomerce.DTO.PedidoDTO;
 import com.example.Eccomerce.Exception.PedidoExisteException;
 import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
 import com.example.Eccomerce.Repository.PedidoRepository;

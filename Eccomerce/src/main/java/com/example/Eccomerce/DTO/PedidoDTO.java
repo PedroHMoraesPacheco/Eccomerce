@@ -1,4 +1,4 @@
-package com.example.Eccomerce;
+package com.example.Eccomerce.DTO;
 
 import java.time.LocalDate;
 

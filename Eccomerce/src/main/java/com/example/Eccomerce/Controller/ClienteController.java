@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Eccomerce.DTO.ClienteDTO;
+import com.example.Eccomerce.DTO.EnderecoDTO;
 import com.example.Eccomerce.Model.Cliente;
-import com.example.Eccomerce.Model.ClienteDTO;
-import com.example.Eccomerce.Model.EnderecoDTO;
 import com.example.Eccomerce.Service.ClienteService;
 import com.example.Eccomerce.Service.EnderecoService;
 

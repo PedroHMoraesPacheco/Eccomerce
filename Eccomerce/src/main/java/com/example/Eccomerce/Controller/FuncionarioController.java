@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Eccomerce.DTO.FuncionarioDTO;
 import com.example.Eccomerce.Model.Funcionario;
-import com.example.Eccomerce.Model.FuncionarioDTO;
 import com.example.Eccomerce.Service.FuncionarioService;
 
 @RestController

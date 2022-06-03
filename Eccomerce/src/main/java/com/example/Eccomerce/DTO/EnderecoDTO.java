@@ -1,4 +1,6 @@
-package com.example.Eccomerce.Model;
+package com.example.Eccomerce.DTO;
+
+import com.example.Eccomerce.Model.Endereco;
 
 public class EnderecoDTO {
 

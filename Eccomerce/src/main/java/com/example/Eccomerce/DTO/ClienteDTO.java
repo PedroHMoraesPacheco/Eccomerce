@@ -1,8 +1,11 @@
-package com.example.Eccomerce.Model;
+package com.example.Eccomerce.DTO;
 
 import java.util.Date;
 
-public class FuncionarioDTO {
+import com.example.Eccomerce.Model.Cliente;
+
+
+public class ClienteDTO {
 	private Integer id;
 	private String nome;
 	private String email;
@@ -12,20 +15,20 @@ public class FuncionarioDTO {
 	private String telefone;
 	private Date data;
 	
-	public FuncionarioDTO(Funcionario obj) {
+	public ClienteDTO() {
+		super();
+	}
+
+	public ClienteDTO(Cliente obj) {
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
-		this.email = obj.getFuncionario().getEmail();
-		this.username = obj.getFuncionario().getUsername();
-		this.senha = obj.getFuncionario().getSenha();
+		this.email = obj.getCliente().getEmail();
+		this.username = obj.getCliente().getUsername();
+		this.senha = obj.getCliente().getSenha();
 		this.cpf = obj.getCpf();
 		this.telefone = obj.getTelefone();
 		this.data = obj.getDataDeNascimento();
-	}
-
-	public FuncionarioDTO() {
-		super();
 	}
 
 	public Integer getId() {
@@ -68,6 +71,14 @@ public class FuncionarioDTO {
 		this.senha = senha;
 	}
 
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -83,14 +94,5 @@ public class FuncionarioDTO {
 	public void setData(Date data) {
 		this.data = data;
 	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	
 	
 }
