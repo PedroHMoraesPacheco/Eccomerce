@@ -1,15 +1,14 @@
 package com.example.Eccomerce.Model;
 
-<<<<<<< Updated upstream
-import java.time.LocalDate;
-=======
-<<<<<<< HEAD
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -30,9 +29,13 @@ public class Produto {
 	
 	private Date data_cadastro_produto;
 	
-	@OneToOne
-	@JoinColumn(name = "imagem")
-	private Imagem imagem_id;
+	@Lob
+    @Column(name = "imagem", columnDefinition="BLOB")
+    private byte[] imagem;
+	
+	//@OneToOne
+	//@JoinColumn(name = "imagem")
+	//private Imagem imagem_id;
 	
 	@OneToOne
 	@JoinColumn(name = "id")
@@ -131,126 +134,6 @@ public class Produto {
 	public void setFuncionario_id(Funcionario funcionario_id) {
 		this.funcionario_id = funcionario_id;
 	}
-	
-	
-	
-=======
-import java.time.LocalDate;
->>>>>>> b12504aaf21239cdb7844ef0d39a735e11aa2a01
->>>>>>> Stashed changes
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.swing.text.html.HTML;
-
-@Entity
-public class Produto {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	private String nome;
-	
-	private String descricao;
-	
-	private Double preco;
-	
-	private Integer QuantidadeEstoque;
-	
-	private LocalDate DataCadastroProduto;
-	
-	private HTML imagem;
-	
-	@OneToOne
-	@JoinColumn(name="categoria_id")
-	private Categoria categoria_Produto;
-
-	@ManyToOne
-	@JoinColumn(name="funcionario_id")
-	private Funcionario funcionario_Produto;
-
-	public Produto() {
-		super();
-	}
-
-	public Produto(Integer id, String nome, String descricao, Double preco, Integer quantidadeEstoque,
-			LocalDate dataCadastroProduto, HTML imagem, Categoria categoria_Produto, Funcionario funcionario_Produto) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.preco = preco;
-		QuantidadeEstoque = quantidadeEstoque;
-		DataCadastroProduto = dataCadastroProduto;
-		this.imagem = imagem;
-		this.categoria_Produto = categoria_Produto;
-		this.funcionario_Produto = funcionario_Produto;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
-
-	public Integer getQuantidadeEstoque() {
-		return QuantidadeEstoque;
-	}
-
-	public void setQuantidadeEstoque(Integer quantidadeEstoque) {
-		QuantidadeEstoque = quantidadeEstoque;
-	}
-
-	public LocalDate getDataCadastroProduto() {
-		return DataCadastroProduto;
-	}
-
-	public void setDataCadastroProduto(LocalDate dataCadastroProduto) {
-		DataCadastroProduto = dataCadastroProduto;
-	}
-
-	public HTML getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(HTML imagem) {
-		this.imagem = imagem;
-	}
-
-	public Funcionario getFuncionario_Produto() {
-		return funcionario_Produto;
-	}
-
-	public void setFuncionario_Produto(Funcionario funcionario_Produto) {
-		this.funcionario_Produto = funcionario_Produto;
-	}
-	
 }
+	
+
