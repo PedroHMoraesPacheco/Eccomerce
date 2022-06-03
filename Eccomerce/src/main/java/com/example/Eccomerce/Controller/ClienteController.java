@@ -36,7 +36,7 @@ public class ClienteController {
 			List<ClienteDTO> listDTO = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
 			return listDTO;
 		}
-		
+	
 		@GetMapping("/{id}")
 		public ClienteDTO findByid(@PathVariable Integer id){
 			ClienteDTO novaDTO = new ClienteDTO(clienteService.findClienteByid(id));

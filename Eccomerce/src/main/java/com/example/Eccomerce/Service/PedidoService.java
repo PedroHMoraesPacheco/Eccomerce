@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.Eccomerce.DTO.PedidoDTO;
 import com.example.Eccomerce.Exception.PedidoExisteException;
 import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
+import com.example.Eccomerce.Model.Pedido;
 import com.example.Eccomerce.Repository.PedidoRepository;
 
 
@@ -19,8 +20,8 @@ public class PedidoService {
 	PedidoRepository pedidoR;
 
 	//get
-	public PedidoDTO listarPedido(Integer id) throws PedidoNaoEcontradoException {
-		Optional<PedidoDTO> optional = pedidoR.findById(id);
+	public Pedido listarPedido(Integer id) throws PedidoNaoEcontradoException {
+		Optional<Pedido> optional = pedidoR.findById(id);
 		if (optional.isEmpty()) {
 			throw new PedidoNaoEcontradoException("O Produto não foi encontrado!");
 		}
@@ -28,15 +29,15 @@ public class PedidoService {
 	}
 	
 	
-	public void verificarPedidoExiste(PedidoDTO pedido) throws PedidoExisteException {
-		Optional<PedidoDTO> optional = pedidoR.findById(pedido.getId());
+	public void verificarPedidoExiste(Pedido pedido) throws PedidoExisteException {
+		Optional<Pedido> optional = pedidoR.findById(pedido.getId());
 		if (optional.isPresent()) {
 			throw new PedidoExisteException("Pedido já cadastrado!");
 		}
 	}
 	
 	//post
-	public void criarPedido(PedidoDTO pedido) throws PedidoExisteException {
+	public void criarPedido(Pedido pedido) throws PedidoExisteException {
 		verificarPedidoExiste(pedido);
 		pedidoR.save(pedido);
 	}
@@ -44,7 +45,7 @@ public class PedidoService {
 	
 	//delete
 	public void deletarPedido(Integer id) throws PedidoNaoEcontradoException {
-		Optional<PedidoDTO> optional = pedidoR.findById(id);
+		Optional<Pedido> optional = pedidoR.findById(id);
 
 		if (optional.isEmpty()) {
 			throw new PedidoNaoEcontradoException("O Pedido não foi encontrado!");
@@ -53,12 +54,12 @@ public class PedidoService {
 	}
 	
 	//put
-	public PedidoDTO editarPedido(PedidoDTO pedido, Integer id) throws PedidoExisteException, PedidoNaoEcontradoException {
-		Optional<PedidoDTO> optional = pedidoR.findById(id);
+	public Pedido editarPedido(Pedido pedido, Integer id) throws PedidoExisteException, PedidoNaoEcontradoException {
+		Optional<Pedido> optional = pedidoR.findById(id);
 		if (optional.isEmpty()) {
 			throw new PedidoNaoEcontradoException("O Pedido não foi encontrado!");
 		}
-		PedidoDTO pedidoOld = optional.get();
+		Pedido pedidoOld = optional.get();
 		if (!pedido.getNumeroPedido().equals("") && pedido.getId() != null) {
 			verificarPedidoExiste(pedido);
 			pedidoOld.setNumeroPedido(pedido.getNumeroPedido());

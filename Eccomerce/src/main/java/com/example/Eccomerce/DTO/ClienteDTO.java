@@ -6,6 +6,7 @@ import com.example.Eccomerce.Model.Cliente;
 
 
 public class ClienteDTO {
+	
 	private Integer id;
 	private String nome;
 	private String email;
