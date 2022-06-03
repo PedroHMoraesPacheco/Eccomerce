@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Eccomerce.DTO.FuncionarioDTO;
 import com.example.Eccomerce.Model.Funcionario;
+import com.example.Eccomerce.Model.User;
 import com.example.Eccomerce.Repository.FuncionarioRepository;
 
 @Service
@@ -48,7 +50,50 @@ public class FuncionarioService {
         	   FuncionarioVelho.getFuncionario().setUsername(novaFuncionario.getFuncionario().getUsername());
            }
            return repositorio.save(FuncionarioVelho);
-   }
+    }
+	
+	public Funcionario TransformaDto(FuncionarioDTO velhoDto, User usuario) {
+        Funcionario novoFuncionario = new Funcionario();
+        novoFuncionario.setFuncionario(usuario);
+        novoFuncionario.setNome(velhoDto.getNome());
+        novoFuncionario.setTelefone(velhoDto.getTelefone());
+        novoFuncionario.setCpf(velhoDto.getCpf());
+        novoFuncionario.setDataDeNascimento(velhoDto.getData());
+        novoFuncionario.getFuncionario().setEmail(velhoDto.getEmail());
+        novoFuncionario.getFuncionario().setSenha(velhoDto.getSenha());
+        novoFuncionario.getFuncionario().setUsername(velhoDto.getUsername());
+        novoFuncionario.getFuncionario().setRole(velhoDto.getRole());
+
+        repositorio.save(novoFuncionario);
+        return novoFuncionario;
+    }
+	
+	public Funcionario PutByDTO(Integer id,FuncionarioDTO novoFuncionario) {
+        Funcionario velhoFuncionario=funcionarioByID(id);
+        if(novoFuncionario.getNome()!=null) {
+            velhoFuncionario.setNome(novoFuncionario.getNome());
+        }
+        if(novoFuncionario.getTelefone()!=null) {
+            velhoFuncionario.setTelefone(novoFuncionario.getTelefone());
+        }
+        if(novoFuncionario.getCpf()!=null) {
+            velhoFuncionario.setCpf(novoFuncionario.getCpf());
+        }
+        if(novoFuncionario.getData()!=null) {
+            velhoFuncionario.setDataDeNascimento(novoFuncionario.getData());
+        }
+        if(novoFuncionario.getEmail()!=null) {
+            velhoFuncionario.getFuncionario().setEmail(novoFuncionario.getEmail());
+        }
+        if(novoFuncionario.getUsername()!=null) {
+            velhoFuncionario.getFuncionario().setUsername(novoFuncionario.getUsername());
+        }
+        if(novoFuncionario.getSenha()!=null) {
+            velhoFuncionario.getFuncionario().setSenha(novoFuncionario.getSenha());
+        }
+        repositorio.save(velhoFuncionario);
+        return velhoFuncionario;
+    }
 	
 }
 

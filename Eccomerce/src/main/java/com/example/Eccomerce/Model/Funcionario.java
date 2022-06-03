@@ -1,6 +1,6 @@
 package com.example.Eccomerce.Model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -86,4 +86,10 @@ public class Funcionario {
 	public String getCpf() {
 		return cpf;
 	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
+	
 }

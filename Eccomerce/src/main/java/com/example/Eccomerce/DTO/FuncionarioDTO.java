@@ -13,6 +13,7 @@ public class FuncionarioDTO {
 	private String cpf;
 	private String telefone;
 	private Date data;
+	private String role;
 	
 	public FuncionarioDTO(Funcionario obj) {
 		super();
@@ -24,6 +25,7 @@ public class FuncionarioDTO {
 		this.cpf = obj.getCpf();
 		this.telefone = obj.getTelefone();
 		this.data = obj.getDataDeNascimento();
+		this.role = "Funcionario";
 	}
 
 	public FuncionarioDTO() {
@@ -93,6 +95,16 @@ public class FuncionarioDTO {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	
 	
 	
 }
