@@ -1,11 +1,14 @@
 package com.example.Eccomerce.Service;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import com.example.Eccomerce.Exception.ProdutoExisteException;
 import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Produto;
@@ -73,4 +76,10 @@ public class ProdutoService {
 		repository.delete(optional.get());
 	}
 	
+	public ProdutoDTO addImageUrl(Produto produto) {
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("produto/{id}/imagem")
+				.buildAndExpand(produto.getId()).toUri();
+		ProdutoDTO produtodto=new ProdutoDTO();
+		produtodto.se
+	}
 }

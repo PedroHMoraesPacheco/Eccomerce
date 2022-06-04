@@ -31,7 +31,7 @@ public class SpringFoxConfig {
 						+ "\nJoão Bernardes"
 						+ "\nLuiz Felipe"
 						+ "\nMaria Aparecida Tavares de Oliveira Souza"
-						+ "\nPedro")
+						+ "\nPedro Henrique Moraes Pacheco")
 				.license("Apache License Version 2.0")
 				.version("1.0.0")
 				.build();
