@@ -1,5 +1,8 @@
 package com.example.Eccomerce.Controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -26,15 +29,23 @@ public class PedidoController {
 	@Autowired
 	PedidoService service;
 
+	@GetMapping()
+	public List<PedidoDTO> listarTudo() {
+		List<Pedido> list = service.listarTudo();
+		List<PedidoDTO> listDTO = list.stream().map(obj -> new PedidoDTO(obj)).collect(Collectors.toList());
+		return listDTO;	
+	}
+
 	@GetMapping("{numeroPedido}")
 	public Pedido getOne(@PathVariable Integer numeroPedido) throws PedidoNaoEcontradoException {
 		return service.listarPedido(numeroPedido);
 	}
 
 	@PutMapping("/{numeroPedido}")
-	public Pedido update(@RequestBody Pedido pedido, @PathVariable Integer numeroPedido)
+	public PedidoDTO update(@RequestBody PedidoDTO pedido, @PathVariable Integer numeroPedido)
 			throws PedidoNaoEcontradoException, PedidoExisteException {
-		return service.editarPedido(pedido, numeroPedido);
+		service.editarPedido(service.TransformaPedidoDto(pedido), numeroPedido);
+		return pedido;
 	}
 
 	@DeleteMapping("/{numeroPedido}")
@@ -43,9 +54,8 @@ public class PedidoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> insert(@RequestBody Pedido pedido) throws PedidoExisteException {
-		service.criarPedido(pedido);
-
+	public ResponseEntity<?> insert(@RequestBody PedidoDTO pedido) throws PedidoExisteException {
+		// Transformação de DTO para Pedido no Service.
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 }

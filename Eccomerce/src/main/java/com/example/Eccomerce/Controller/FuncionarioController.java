@@ -20,40 +20,38 @@ import com.example.Eccomerce.Service.FuncionarioService;
 @RestController
 @RequestMapping("/Funcionario")
 public class FuncionarioController {
-	
-		@Autowired
-		FuncionarioService funcionarioService;
-		
-			@GetMapping
-			public List<FuncionarioDTO> getTodos(){
-				List<Funcionario> list=funcionarioService.retorneTODOS();
-				List<FuncionarioDTO> listDTO = list.stream().map(obj -> new FuncionarioDTO(obj)).collect(Collectors.toList());
-				return listDTO;
-			}
-			
-			@GetMapping("/{id}")
-			public FuncionarioDTO findByid(@PathVariable Integer id){
-				FuncionarioDTO novaDTO = new FuncionarioDTO(funcionarioService.funcionarioByID(id));
-				return novaDTO;
-			}
-			
-			@PostMapping()
-			public FuncionarioDTO newFuncionario(@RequestBody FuncionarioDTO funcionario){ 
-				funcionarioService.TransformaDto(funcionario, funcionarioService.PutUserFuncionarioDto(funcionario));
-				return funcionario;
-			}
-			
-			@DeleteMapping("/{id}")
-			public void deleteById(@PathVariable Integer id){
-				funcionarioService.Delete(id);
-			}
-			
-			@PutMapping("/{id}")
-	        public FuncionarioDTO changeById(@PathVariable Integer id, @RequestBody FuncionarioDTO novaFuncionario){
-	            FuncionarioDTO novaDTO= new FuncionarioDTO(funcionarioService.PutByDTO(id, novaFuncionario));
-	            return novaDTO;
-	        }
-			
-			
+
+	@Autowired
+	FuncionarioService funcionarioService;
+
+	@GetMapping
+	public List<FuncionarioDTO> getTodos() {
+		List<Funcionario> list = funcionarioService.retorneTODOS();
+		List<FuncionarioDTO> listDTO = list.stream().map(obj -> new FuncionarioDTO(obj)).collect(Collectors.toList());
+		return listDTO;
+	}
+
+	@GetMapping("/{id}")
+	public FuncionarioDTO findByid(@PathVariable Integer id) {
+		FuncionarioDTO novaDTO = new FuncionarioDTO(funcionarioService.funcionarioByID(id));
+		return novaDTO;
+	}
+
+	@PostMapping()
+	public FuncionarioDTO newFuncionario(@RequestBody FuncionarioDTO funcionario) {
+		funcionarioService.TransformaDto(funcionario, funcionarioService.PutUserFuncionarioDto(funcionario));
+		return funcionario;
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteById(@PathVariable Integer id) {
+		funcionarioService.Delete(id);
+	}
+
+	@PutMapping("/{id}")
+	public FuncionarioDTO changeById(@PathVariable Integer id, @RequestBody FuncionarioDTO novaFuncionario) {
+		FuncionarioDTO novaDTO = new FuncionarioDTO(funcionarioService.PutByDTO(id, novaFuncionario));
+		return novaDTO;
+	}
 
 }

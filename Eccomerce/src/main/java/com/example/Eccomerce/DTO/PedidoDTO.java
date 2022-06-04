@@ -19,6 +19,9 @@ public class PedidoDTO {
 	
 	@NotBlank
 	private Double valorTotal;
+	
+	@NotBlank
+	private String status;
 
 	@NotBlank
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -35,6 +38,7 @@ public class PedidoDTO {
 		this.valorTotal = pedido.getValorTotal();
 		this.dataPedido = pedido.getDataPedido();
 		this.dataEntrega = pedido.getDataEntrega();
+		this.status =pedido.getStatus();
 	}
 
 	public Integer getNumeroPedido() {
@@ -71,6 +75,14 @@ public class PedidoDTO {
 
 	public Integer getId() {
 		return id;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	
