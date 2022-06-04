@@ -1,12 +1,16 @@
 package com.example.Eccomerce.DTO;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import com.example.Eccomerce.Model.Categoria;
 
 public class CategoriaDTO {
 
-	@NotNull
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@NotNull
 	private String nome;
@@ -14,6 +18,12 @@ public class CategoriaDTO {
 	private String descricao;
 	@NotNull
 	private Integer numeroCategoria;
+
+	
+	
+	public CategoriaDTO() {
+		super();
+	}
 
 	public CategoriaDTO(Categoria categoria) {
 		super();

@@ -49,9 +49,9 @@ public class CategoriaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> insert(@RequestBody CategoriaDTO categoria) throws CategoriaExisteException {
-		// Transformação de DTO para Categoria no Service.
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	public CategoriaDTO insert(@RequestBody CategoriaDTO categoria) throws CategoriaExisteException {
+		 categoriaS.TransformaCategoriaDto(categoria);
+		 return categoria;
 	}
 
 	@DeleteMapping("/{id}")
