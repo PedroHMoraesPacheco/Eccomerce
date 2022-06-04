@@ -1,40 +1,44 @@
-package com.example.Eccomerce.Model;
+package com.example.Eccomerce.DTO;
 
-import java.util.List;
-
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
-@Entity
-public class Categoria {
+import com.example.Eccomerce.Model.Categoria;
+
+public class CategoriaDTO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	@NotNull
 	private String nome;
-
+	@NotNull
 	private String descricao;
-
+	@NotNull
 	private Integer numeroCategoria;
 
-	@OneToMany(mappedBy = "categoria_Produto")
-	private List<Produto> produto;
-
-	public Categoria() {
+	
+	
+	public CategoriaDTO() {
 		super();
 	}
 
-	public Categoria(Integer id, String nome, String descricao, Integer numeroCategoria, List<Produto> produto) {
+	public CategoriaDTO(Categoria categoria) {
 		super();
+		this.id = categoria.getId();
+		this.nome = categoria.getNome();
+		this.descricao = categoria.getDescricao();
+		this.numeroCategoria = categoria.getNumeroCategoria();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
 		this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.produto = produto;
-		this.numeroCategoria = numeroCategoria;
 	}
 
 	public String getNome() {
@@ -51,18 +55,6 @@ public class Categoria {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public List<Produto> getProduto() {
-		return produto;
-	}
-
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	public Integer getNumeroCategoria() {

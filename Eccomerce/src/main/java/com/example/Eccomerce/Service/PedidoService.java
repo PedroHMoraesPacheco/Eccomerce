@@ -29,7 +29,7 @@ public class PedidoService {
 		return novoPedido;
 	}
 
-	public List<Pedido> listarTudo() 	{
+	public List<Pedido> listarTudo() {
 		return pedidoR.findAll();
 	}
 
@@ -66,16 +66,35 @@ public class PedidoService {
 	}
 
 	// put
+	@SuppressWarnings("unlikely-arg-type")
 	public Pedido editarPedido(Pedido pedido, Integer id) throws PedidoExisteException, PedidoNaoEcontradoException {
 		Optional<Pedido> optional = pedidoR.findById(id);
 		if (optional.isEmpty()) {
 			throw new PedidoNaoEcontradoException("O Pedido não foi encontrado!");
 		}
 		Pedido pedidoOld = optional.get();
-		if (!pedido.getNumeroPedido().equals("") && pedido.getId() != null) {
+		if (!pedido.getNumeroPedido().equals("") && pedido.getNumeroPedido() != null) {
 			verificarPedidoExiste(pedido);
 			pedidoOld.setNumeroPedido(pedido.getNumeroPedido());
 		}
+		if (!pedido.getStatus().equals("") && pedido.getStatus() != null) {
+			verificarPedidoExiste(pedido);
+			pedidoOld.setStatus(pedido.getStatus());
+			;
+		}
+		if (!pedido.getDataEntrega().equals("") && pedido.getDataEntrega() != null) {
+			verificarPedidoExiste(pedido);
+			pedidoOld.setDataEntrega(pedido.getDataEntrega());
+		}
+		if (!pedido.getDataPedido().equals("") && pedido.getDataPedido() != null) {
+			verificarPedidoExiste(pedido);
+			pedidoOld.setDataPedido(pedido.getDataPedido());
+		}
+		if (!pedido.getValorTotal().equals("") && pedido.getValorTotal() != null) {
+			verificarPedidoExiste(pedido);
+			pedidoOld.setValorTotal(pedido.getValorTotal());
+		}
+
 		return pedidoR.save(pedido);
 	}
 

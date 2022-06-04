@@ -30,27 +30,27 @@ public class PedidoController {
 	PedidoService service;
 
 	@GetMapping()
-	public List<PedidoDTO> listarTudo() {
+	public List<PedidoDTO> listAll() {
 		List<Pedido> list = service.listarTudo();
 		List<PedidoDTO> listDTO = list.stream().map(obj -> new PedidoDTO(obj)).collect(Collectors.toList());
-		return listDTO;	
+		return listDTO;
 	}
 
-	@GetMapping("{numeroPedido}")
-	public Pedido getOne(@PathVariable Integer numeroPedido) throws PedidoNaoEcontradoException {
-		return service.listarPedido(numeroPedido);
+	@GetMapping("{id}")
+	public Pedido getOne(@PathVariable Integer id) throws PedidoNaoEcontradoException {
+		return service.listarPedido(id);
 	}
 
-	@PutMapping("/{numeroPedido}")
-	public PedidoDTO update(@RequestBody PedidoDTO pedido, @PathVariable Integer numeroPedido)
+	@PutMapping("/{id}")
+	public PedidoDTO update(@RequestBody PedidoDTO pedido, @PathVariable Integer id)
 			throws PedidoNaoEcontradoException, PedidoExisteException {
-		service.editarPedido(service.TransformaPedidoDto(pedido), numeroPedido);
+		service.editarPedido(service.TransformaPedidoDto(pedido), id);
 		return pedido;
 	}
 
-	@DeleteMapping("/{numeroPedido}")
-	public void delete(@PathVariable Integer numeroPedido) throws PedidoNaoEcontradoException {
-		service.deletarPedido(numeroPedido);
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Integer id) throws PedidoNaoEcontradoException {
+		service.deletarPedido(id);
 	}
 
 	@PostMapping
