@@ -1,6 +1,5 @@
 package com.example.Eccomerce.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import com.example.Eccomerce.DTO.ClienteDTO;
 import com.example.Eccomerce.DTO.EnderecoDTO;
 import com.example.Eccomerce.Model.Cliente;
 import com.example.Eccomerce.Model.Endereco;
+import com.example.Eccomerce.Model.Mail;
 import com.example.Eccomerce.Model.User;
 import com.example.Eccomerce.Repository.ClienteRepository;
 
@@ -21,6 +21,9 @@ public class ClienteService {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	MailService mailService;
 	
 	public List<Cliente> RetorneTodos(){
 		return clienteRepo.findAll();
@@ -67,6 +70,7 @@ public class ClienteService {
 		novoCliente.getCliente().setRole(velhoDto.getRole());
 		
 		clienteRepo.save(novoCliente);
+		EmailNovoCliente(novoCliente);
 		return novoCliente;
 	}
 	public Cliente PutByDTO(Integer id,ClienteDTO novoCliente) {
@@ -98,5 +102,14 @@ public class ClienteService {
 
 	public User PutUserClienteDto(ClienteDTO clienteDto) {
 		return userService.TransformaUserClienteDto(clienteDto);
+	}
+	
+	public void EmailNovoCliente(Cliente cliente) {
+		Mail emailNovo= new Mail();
+		emailNovo.setAssunto("Nova Conta.");
+		String text="Parabens pela criação de uma nova conta!";
+		emailNovo.setTexto(text);
+		emailNovo.setPara(cliente.getCliente().getEmail());
+		mailService.createEmail(emailNovo);
 	}
 }
