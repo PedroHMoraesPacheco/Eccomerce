@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.Eccomerce.Model.Imagem;
 
 @Repository
-public interface ImagemRepository extends JpaRepository <Imagem, Long> {
+public interface ImagemRepository extends JpaRepository <Imagem, Integer> {
 
 }

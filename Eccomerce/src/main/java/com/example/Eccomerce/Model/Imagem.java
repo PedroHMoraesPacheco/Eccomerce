@@ -13,50 +13,77 @@ import javax.persistence.OneToOne;
 public class Imagem {
 	 @Id
 	 @GeneratedValue(strategy= GenerationType.IDENTITY)
-	 private Long id;
+	 private Integer id;
 	
+	 private String nome;
+	
+	 public String mimetype;
+	 
 	 @Lob
-	 private byte[] imagem;
+	 private byte[] data;
 	
 	 @OneToOne
-	 @JoinColumn(name = "id_produto")
-	 private Produto nome;
+	 @JoinColumn(name = "imagem")
+	 private Produto produto;
 
 	public Imagem() {
 		super();
 	}
 
-	public Imagem(Long id, byte[] imagem, Produto nome) {
+	public Imagem(Integer id, String nome, String mimetype, byte[] data, Produto produto) {
 		super();
 		this.id = id;
-		this.imagem = imagem;
 		this.nome = nome;
+		this.mimetype = mimetype;
+		this.data = data;
+		this.produto = produto;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public byte[] getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(byte[] imagem) {
-		this.imagem = imagem;
-	}
-
-	public Produto getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(Produto nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	 	 
+
+	public String getMimetype() {
+		return mimetype;
+	}
+
+	public void setMimetype(String mimetype) {
+		this.mimetype = mimetype;
+	}
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+	 
+	 
 	
-	    
 }
+	 
+	 
+	 
+	 
+

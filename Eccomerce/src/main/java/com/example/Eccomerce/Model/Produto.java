@@ -2,15 +2,15 @@ package com.example.Eccomerce.Model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Produto {
@@ -19,32 +19,34 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull
 	private String nome;
 	
+	@NotNull
 	private String descricao;
 	
+	@NotNull
 	private Double preco;
 	
+	@NotNull
 	private Integer quantidade_estoque;
 	
+	@NotNull
 	private Date data_cadastro_produto;
 	
-	@Lob
-    @Column(name = "imagem", columnDefinition="BLOB")
-    private byte[] imagem;
-	
-	//@OneToOne
-	//@JoinColumn(name = "imagem")
-	//private Imagem imagem_id;
-	
+			
 	@OneToOne
-	@JoinColumn(name = "id")
-	private Categoria categoria_id;
+	@JoinColumn(name="funcionario_id")
+	private Categoria categoria_Produto;
 
 	@ManyToOne
-	@JoinColumn(name = "id")
-	private Funcionario funcionario_id;
+	@JoinColumn(name="funcionario_id")
+    private Funcionario funcionario_Produto;
+	
 
+	@OneToOne(mappedBy = "imagem", cascade = CascadeType.ALL)
+	private Imagem imagem_id;
+	
 	public Produto() {
 		super();
 	}
@@ -59,8 +61,8 @@ public class Produto {
 		this.quantidade_estoque = quantidade_estoque;
 		this.data_cadastro_produto = data_cadastro_produto;
 		this.imagem_id = imagem_id;
-		this.categoria_id = categoria_id;
-		this.funcionario_id = funcionario_id;
+		this.categoria_Produto = categoria_id;
+		this.funcionario_Produto = funcionario_id;
 	}
 
 	public Integer getId() {
@@ -120,20 +122,23 @@ public class Produto {
 	}
 
 	public Categoria getCategoria_id() {
-		return categoria_id;
+		return categoria_Produto;
 	}
 
 	public void setCategoria_id(Categoria categoria_id) {
-		this.categoria_id = categoria_id;
+		this.categoria_Produto = categoria_id;
 	}
 
 	public Funcionario getFuncionario_id() {
-		return funcionario_id;
+		return funcionario_Produto;
 	}
 
 	public void setFuncionario_id(Funcionario funcionario_id) {
-		this.funcionario_id = funcionario_id;
+		this.funcionario_Produto = funcionario_id;
 	}
+
+	
+	
 }
 	
 
