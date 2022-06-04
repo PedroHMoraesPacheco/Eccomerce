@@ -24,14 +24,14 @@ public class Pedido {
 
 	@NotBlank
 	private Integer numeroPedido;
-	
+
 	@NotBlank
 	private Double valorTotal;
 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	@Column(name = "data_pedido")
 	private LocalDate dataPedido;
-	
+
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	@Column(name = "data_entrega")
 	private LocalDate dataEntrega;
@@ -43,13 +43,10 @@ public class Pedido {
 
 	@OneToMany(mappedBy = "pedido_id")
 	private List<Produtos_Pedidos> produtoPedido;
-	
 
 	public Pedido() {
 		super();
 	}
-
-	
 
 	public Pedido(Integer id, Integer numeroPedido, Double valorTotal, LocalDate dataPedido, LocalDate dataEntrega,
 			String status, Cliente cliente_id, Funcionario funcionario_id, List<Produtos_Pedidos> produtoPedido) {
@@ -116,19 +113,12 @@ public class Pedido {
 		return id;
 	}
 
-
-
 	public Cliente getCliente_id() {
 		return cliente_id;
 	}
-
-
 
 	public void setCliente_id(Cliente cliente_id) {
 		this.cliente_id = cliente_id;
 	}
 
-
-
-	
 }

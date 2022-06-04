@@ -1,6 +1,7 @@
 package com.example.Eccomerce.Model;
 
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,27 +14,28 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nome;
-	
+
 	private String descricao;
-	
-	@OneToMany(mappedBy ="categoria_Produto")
+
+	private Integer numeroCategoria;
+
+	@OneToMany(mappedBy = "categoria_Produto")
 	private List<Produto> produto;
 
 	public Categoria() {
 		super();
 	}
 
-	public Categoria(Integer id, String nome, String descricao, List<Produto> produto) {
+	public Categoria(Integer id, String nome, String descricao, Integer numeroCategoria, List<Produto> produto) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.produto = produto;
+		this.numeroCategoria = numeroCategoria;
 	}
-
-
 
 	public String getNome() {
 		return nome;
@@ -51,20 +53,24 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
-
 	public List<Produto> getProduto() {
 		return produto;
 	}
-
-
 
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
 
-
-
 	public Integer getId() {
 		return id;
 	}
+
+	public Integer getNumeroCategoria() {
+		return numeroCategoria;
+	}
+
+	public void setNumeroCategoria(Integer numeroCategoria) {
+		this.numeroCategoria = numeroCategoria;
+	}
+
 }
