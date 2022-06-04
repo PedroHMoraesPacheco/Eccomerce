@@ -16,6 +16,9 @@ public class FuncionarioService {
 	@Autowired
 	FuncionarioRepository repositorio;
 	
+	@Autowired
+	UserService userService;
+	
 	public List<Funcionario> retorneTODOS() {
 		return repositorio.findAll();
 	}
@@ -93,6 +96,10 @@ public class FuncionarioService {
         }
         repositorio.save(velhoFuncionario);
         return velhoFuncionario;
+    }
+	
+	public User PutUserFuncionarioDto(FuncionarioDTO funcionarioDto) {
+        return userService.TransformaUserFuncionarioDto(funcionarioDto);
     }
 	
 }

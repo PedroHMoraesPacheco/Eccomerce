@@ -36,21 +36,24 @@ public class FuncionarioController {
 				FuncionarioDTO novaDTO = new FuncionarioDTO(funcionarioService.funcionarioByID(id));
 				return novaDTO;
 			}
-			@PostMapping("/{id}")
-			public FuncionarioDTO newFuncionario(@RequestBody Funcionario funcionario){ 
-				funcionarioService.newFuncionario(funcionario);
-				FuncionarioDTO novaDTO = new FuncionarioDTO(funcionario);
-				return novaDTO;
+			
+			@PostMapping()
+			public FuncionarioDTO newFuncionario(@RequestBody FuncionarioDTO funcionario){ 
+				funcionarioService.TransformaDto(funcionario, funcionarioService.PutUserFuncionarioDto(funcionario));
+				return funcionario;
 			}
+			
 			@DeleteMapping("/{id}")
 			public void deleteById(@PathVariable Integer id){
 				funcionarioService.Delete(id);
 			}
+			
 			@PutMapping("/{id}")
-			public FuncionarioDTO changeById(@PathVariable Integer id, @RequestBody Funcionario funcionario){
-				funcionarioService.changeById(id, funcionario);
-				FuncionarioDTO novaDTO = new FuncionarioDTO(funcionario);
-				return novaDTO;
-			}
+	        public FuncionarioDTO changeById(@PathVariable Integer id, @RequestBody FuncionarioDTO novaFuncionario){
+	            FuncionarioDTO novaDTO= new FuncionarioDTO(funcionarioService.PutByDTO(id, novaFuncionario));
+	            return novaDTO;
+	        }
+			
+			
 
 }
