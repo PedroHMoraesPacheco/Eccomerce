@@ -1,6 +1,7 @@
 package com.example.Eccomerce.Service;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -112,4 +113,11 @@ public class ClienteService {
 		emailNovo.setPara(cliente.getCliente().getEmail());
 		mailService.createEmail(emailNovo);
 	}
+	public void EnviarCodigoDeSenha(Integer id) {
+		userService.EnviarCodigoDeSenha(findClienteByid(id).getCliente().getId());
+	}
+	public void TestarCodigo(Integer id,String codigoteste,String novaSenha) {
+		userService.TestarCodigo(findClienteByid(id).getCliente().getId(), codigoteste, novaSenha);
+	}
+	
 }
