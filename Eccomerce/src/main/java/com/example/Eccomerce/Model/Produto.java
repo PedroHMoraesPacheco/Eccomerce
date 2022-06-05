@@ -38,7 +38,7 @@ public class Produto {
 	
 			
 	@OneToOne
-	@JoinColumn(name="funcionario_id")
+	@JoinColumn(name="categoria_id")
 	private Categoria categoria_Produto;
 
 	@OneToMany(mappedBy = "produto_id")
@@ -49,7 +49,7 @@ public class Produto {
     private Funcionario funcionario_Produto;
 	
 
-	@OneToOne(mappedBy = "imagem", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "produto", cascade = CascadeType.ALL)
 	private Imagem imagem_id;
 	
 	public Produto() {

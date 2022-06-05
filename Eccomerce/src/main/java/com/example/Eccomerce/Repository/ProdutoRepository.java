@@ -11,4 +11,5 @@ import com.example.Eccomerce.Model.Produto;
 public interface ProdutoRepository extends JpaRepository <Produto, Integer>{
 
 	Optional<Produto> findByNome(String nome);
+	Optional<Produto> findById(Integer id);
 }

@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 public class Imagem {
 	 @Id
 	 @GeneratedValue(strategy= GenerationType.IDENTITY)
-	 private Integer id;
+	 private Long id;
 	
 	 private String nome;
 	
@@ -30,7 +30,7 @@ public class Imagem {
 		super();
 	}
 
-	public Imagem(Integer id, String nome, String mimetype, byte[] data, Produto produto) {
+	public Imagem(Long id, String nome, String mimetype, byte[] data, Produto produto) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -39,13 +39,6 @@ public class Imagem {
 		this.produto = produto;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -77,6 +70,14 @@ public class Imagem {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	 
 	 

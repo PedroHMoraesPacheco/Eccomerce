@@ -22,7 +22,7 @@ public class ProdutoService {
 	ProdutoRepository repository;
 	
 	@Autowired 
-	ImagemService service;
+	ImagemService imagemService;
 	
 	public List<Produto> listarTudo(){
 			return repository.findAll();
@@ -43,16 +43,19 @@ public class ProdutoService {
 		}
 	}
 	
-	
 	public void create(Produto produto, MultipartFile file) throws IOException, ProdutoExisteException {
 		verificarProdutoExiste(produto);
 		Produto savedProduto = repository.save(produto);
-		service.create(savedProduto, file);
+		imagemService.create(savedProduto, file);
 	}
 	
 	
-	public Produto update(ProdutoDTO novoProduto, String nome) throws ProdutoNotExcepetion {
-		Produto oldProduto = this.findByName(nome);
+	public Produto update(ProdutoDTO novoProduto, Integer id) throws ProdutoNotExcepetion {
+		Produto oldProduto = repository.findById(id).get();
+		
+			if(novoProduto.getNome()!= null) {
+				oldProduto.setNome(novoProduto.getNome());
+			}
 			if(novoProduto.getDescricao()!= null) {
 				oldProduto.setDescricao(novoProduto.getDescricao());
 			}
@@ -76,10 +79,17 @@ public class ProdutoService {
 		repository.delete(optional.get());
 	}
 	
-	public ProdutoDTO addImageUrl(Produto produto) {
+	public ProdutoDTO getProdutoDto(Produto produto) {
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("produto/{id}/imagem")
 				.buildAndExpand(produto.getId()).toUri();
 		ProdutoDTO produtodto=new ProdutoDTO();
-		produtodto.se
+		produtodto.setNome(produto.getNome());
+		produtodto.setDescricao(produto.getDescricao());
+		produtodto.setPreco(produto.getPreco());
+		produtodto.setQuantidade_estoque(produto.getQuantidade_estoque());
+		produtodto.setCategoriaId(produto.getCategoria_id().getId());
+		produtodto.setFuncionarioId(produto.getFuncionario_id().getId());
+		produtodto.setImagem_url(uri.toString());
+		return produtodto;
 	}
 }
