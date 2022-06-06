@@ -9,15 +9,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Eccomerce.DTO.ProdutoDTO;
+import com.example.Eccomerce.Exception.CategoriaNaoEcontradaException;
 import com.example.Eccomerce.Exception.ProdutoExisteException;
 import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Imagem;
@@ -46,9 +49,9 @@ public class ProdutoController {
 		return produtoService.findByName(nome);
 	}
 	
-	@PostMapping()
-	public void create(@RequestParam MultipartFile file ,@RequestBody Produto produto) throws IOException, ProdutoExisteException {
-		produtoService.create(produto,file);
+	@PostMapping
+	public void create(@RequestParam MultipartFile file ,@RequestPart ProdutoDTO produtodto) throws IOException, ProdutoExisteException, CategoriaNaoEcontradaException {
+		produtoService.create(produtoService.TrasformaDto(produtodto),file);
 	}
 
 	@PutMapping("/{id}")
@@ -62,7 +65,7 @@ public class ProdutoController {
 		produtoService.delete(id);
 	}
 	@GetMapping(path="/{id}/imagem")
-	public ResponseEntity<byte[]> getimagem(@PathVariable Long produtoId){
+	public ResponseEntity<byte[]> getimagem(@PathVariable (name="id") Long produtoId){
 		Imagem imagem = imagemService.findImagemByid(produtoId);
 		HttpHeaders headers= new HttpHeaders();
 		headers.add("content-type", imagem.getMimetype());

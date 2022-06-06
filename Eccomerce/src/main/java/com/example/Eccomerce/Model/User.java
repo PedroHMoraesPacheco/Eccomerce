@@ -2,6 +2,7 @@ package com.example.Eccomerce.Model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,13 +36,13 @@ public class User{
 	@Column(name = "Role")
 	private String role;
 
-	@OneToOne(mappedBy="cliente")
+	@OneToOne(mappedBy="cliente",cascade = CascadeType.ALL)
 	private Cliente cliente;
 	
-	@OneToOne(mappedBy="funcionario")
+	@OneToOne(mappedBy="funcionario",cascade = CascadeType.ALL)
 	private Funcionario funcionario;
 	
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="usuario",cascade = CascadeType.ALL)
 	private List<CodigoSenha> codigo;
 	
 	public User() {

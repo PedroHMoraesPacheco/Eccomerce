@@ -11,5 +11,6 @@ import com.example.Eccomerce.Model.CodigoSenha;
 public interface CodigoSenhaRepository extends JpaRepository <CodigoSenha, String>{
 	
 	Optional<CodigoSenha> findByCodigo(String codigo);
+	Optional<CodigoSenha> deleteByCodigo(String codigo);
 
 }

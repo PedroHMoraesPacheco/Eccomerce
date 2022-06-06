@@ -21,7 +21,7 @@ public class ProdutoDTO {
 		super();
 	}
 
-	public ProdutoDTO(Produto obj, String url) {
+	public ProdutoDTO(Produto obj) {
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
@@ -31,7 +31,6 @@ public class ProdutoDTO {
 		this.data_cadastro_produto = obj.getData_cadastro_produto();
 		this.categoriaId = obj.getCategoria_id().getId();
 		this.funcionarioId = obj.getFuncionario_id().getId();
-		this.imagem_url = url;
 	}
 
 	public Integer getId() {

@@ -41,7 +41,7 @@ public class Produto {
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria_Produto;
 
-	@OneToMany(mappedBy = "produto_id")
+	@OneToMany(mappedBy = "produto_id",cascade = CascadeType.ALL)
 	private List<Produtos_Pedidos> produtoPedido;
 
 	@ManyToOne

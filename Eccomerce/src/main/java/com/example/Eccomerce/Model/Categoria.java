@@ -2,6 +2,7 @@ package com.example.Eccomerce.Model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ public class Categoria {
 
 	private Integer numeroCategoria;
 
-	@OneToMany(mappedBy = "categoria_Produto")
+	@OneToMany(mappedBy = "categoria_Produto",cascade = CascadeType.ALL)
 	private List<Produto> produto;
 
 	public Categoria() {

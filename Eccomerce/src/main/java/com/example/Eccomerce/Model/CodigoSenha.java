@@ -17,7 +17,7 @@ public class CodigoSenha {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="User-codigo")
+	@JoinColumn(name="User_codigo")
     private User usuario;
 	
 	private String codigo;

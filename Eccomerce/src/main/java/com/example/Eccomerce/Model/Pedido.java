@@ -3,6 +3,7 @@ package com.example.Eccomerce.Model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,7 +42,7 @@ public class Pedido {
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente_id;
 
-	@OneToMany(mappedBy = "pedido_id")
+	@OneToMany(mappedBy = "pedido_id",cascade = CascadeType.ALL)
 	private List<Produtos_Pedidos> produtoPedido;
 
 	public Pedido() {

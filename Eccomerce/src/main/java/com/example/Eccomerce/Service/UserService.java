@@ -3,6 +3,8 @@ package com.example.Eccomerce.Service;
 import java.util.List;
 import java.util.Random;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,22 +71,28 @@ public class UserService {
 		CodigoSenha codigosenha = new CodigoSenha();
 		
 		codigosenha.setCodigo(codigo);
-		usuario.getCodigo().add(codigosenha);
 		
+		usuario.getCodigo().add(codigosenha);
+		codigosenha.setUsuario(usuario);
 		Mail emailNovo= new Mail();
 		emailNovo.setAssunto("Troca de Senha.");
 		String text="Seu codigo é "+codigo+". Utilize o metodo POST /cliente/{codigo} para mudar sua senha.";
 		emailNovo.setTexto(text);
 		emailNovo.setPara(usuario.getEmail());
+		userRepo.save(usuario);
+		codeService.SalvaCodigo(codigosenha);
 		mailService.createEmail(emailNovo);
 	}
-	
+	@Transactional
 	public void TestarCodigo(Integer id,String codigoteste,String novaSenha) {
 		User usuario= userByID(id);
-		CodigoSenha codigoAchado=codeService.userByCodigo(codigoteste);
+		CodigoSenha codigoAchado=codeService.codigoSenhaByCodigo(codigoteste);
 		List<CodigoSenha> list = usuario.getCodigo();
-		if(list.contains(codigoAchado)==true) {
+		if(codigoAchado.getUsuario()==usuario) {
 			usuario.setSenha(novaSenha);
+			codeService.DeleteByCodigo(codigoAchado.getCodigo());
+			usuario.setCodigo(null);
+			userRepo.save(usuario);
 		}else {
 			System.out.println("CODIGO INCORRETO");
 		}

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.Eccomerce.Exception.CategoriaNaoEcontradaException;
 import com.example.Eccomerce.Exception.ProdutoExisteException;
 import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Produto;
@@ -24,6 +25,12 @@ public class ProdutoService {
 	@Autowired 
 	ImagemService imagemService;
 	
+	@Autowired
+	FuncionarioService funciService;
+	
+	@Autowired
+	CategoriaService categoriaService;
+	
 	public List<Produto> listarTudo(){
 			return repository.findAll();
 	}
@@ -37,7 +44,7 @@ public class ProdutoService {
 }
 	
 	public void verificarProdutoExiste(Produto produto) throws ProdutoExisteException {
-		Optional<Produto> optional = repository.findById(produto.getId());
+		Optional<Produto> optional = repository.findByNome(produto.getNome());
 		if(optional.isPresent()) {
 		throw new ProdutoExisteException("Produto já cadastrado!");
 		}
@@ -89,7 +96,21 @@ public class ProdutoService {
 		produtodto.setQuantidade_estoque(produto.getQuantidade_estoque());
 		produtodto.setCategoriaId(produto.getCategoria_id().getId());
 		produtodto.setFuncionarioId(produto.getFuncionario_id().getId());
-		produtodto.setImagem_url(uri.toString());
+		produtodto.setImagem_url(imagemService.createUrl(produto.getId()));
 		return produtodto;
+	}
+	
+	public Produto TrasformaDto(ProdutoDTO produtodto) throws CategoriaNaoEcontradaException {
+		Produto produto=new Produto();
+		produto.setNome(produtodto.getNome());
+		produto.setPreco(produtodto.getPreco());
+		produto.setDescricao(produtodto.getDescricao());
+		produto.setQuantidade_estoque(produtodto.getQuantidade_estoque());
+		produto.setData_cadastro_produto(produtodto.getData_cadastro_produto());
+		produto.setFuncionario_id(funciService.funcionarioByID(produtodto.getFuncionarioId()));
+		produto.setCategoria_id(categoriaService.listarCategoria(produtodto.getCategoriaId()));
+		produto.setImagem_id(produto.getImagem_id());
+		produtodto.setImagem_url(imagemService.createUrl(produto.getId()));
+		return produto;
 	}
 }

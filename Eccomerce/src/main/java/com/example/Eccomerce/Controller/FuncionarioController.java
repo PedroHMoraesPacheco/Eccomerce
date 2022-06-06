@@ -18,7 +18,7 @@ import com.example.Eccomerce.Model.Funcionario;
 import com.example.Eccomerce.Service.FuncionarioService;
 
 @RestController
-@RequestMapping("/Funcionario")
+@RequestMapping("/funcionario")
 public class FuncionarioController {
 
 	@Autowired

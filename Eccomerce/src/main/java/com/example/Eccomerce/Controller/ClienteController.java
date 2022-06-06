@@ -38,7 +38,7 @@ public class ClienteController {
 		return novaDTO;
 	}
 
-	@PostMapping()
+	@PostMapping
 	public ClienteDTO newCliente(@RequestBody ClienteDTO novaDto) {
 		clienteService.TransformaDto(novaDto, clienteService.PutUserClienteDto(novaDto));
 		return novaDto;
@@ -61,7 +61,7 @@ public class ClienteController {
 		return "Verifique seu email.";
 	}
 	@PostMapping("/{id}/{codigo}/{senha}")
-	public void mandarCodigo(@PathVariable Integer id,@PathVariable String codigo,@RequestParam String senha) {
+	public void mandarCodigo(@PathVariable Integer id,@PathVariable String codigo,@PathVariable String senha) {
 		clienteService.TestarCodigo(id, codigo, senha);
 	}
 }

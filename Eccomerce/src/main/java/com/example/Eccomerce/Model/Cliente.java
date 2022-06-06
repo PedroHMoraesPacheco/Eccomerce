@@ -3,6 +3,7 @@ package com.example.Eccomerce.Model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,10 +43,10 @@ public class Cliente{
 	@JoinColumn(name = "cliente_id")
 	private User cliente;
 	
-	@OneToMany(mappedBy = "cliente_id")
+	@OneToMany(mappedBy = "cliente_id",cascade = CascadeType.ALL)
 	private List<Pedido> pedidos;
 	
-	@OneToOne(mappedBy = "cliente_id")
+	@OneToOne(mappedBy = "cliente_id",cascade = CascadeType.ALL)
 	private Endereco endereco;
 	
 	public Cliente() {

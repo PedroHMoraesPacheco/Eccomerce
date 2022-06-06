@@ -3,6 +3,7 @@ package com.example.Eccomerce.Service;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -46,5 +47,13 @@ public class ImagemService {
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produto/{id}/image").buildAndExpand(id)
 				.toUri();
 		return uri.toString();
+	}
+	@Transactional
+	public Imagem getImage(Long id) {
+		Optional<Imagem> optional = repository.findById(id);
+		if (optional.isEmpty()) {
+			return null;
+		}
+		return optional.get();
 	}
 }

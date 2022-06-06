@@ -3,6 +3,7 @@ package com.example.Eccomerce.Model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class Funcionario {
 	@JoinColumn(name = "Funcionario_id")
 	private User funcionario;
 	
-	@OneToMany(mappedBy="funcionario_Produto")
+	@OneToMany(mappedBy="funcionario_Produto",cascade = CascadeType.ALL)
 	private List<Produto> produto;
 
 	public Funcionario(Integer id, String nome, String cpf, String telefone, Date dataDeNascimento, User funcionario) {
