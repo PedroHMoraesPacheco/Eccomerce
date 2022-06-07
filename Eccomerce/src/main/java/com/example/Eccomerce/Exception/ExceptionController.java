@@ -1,4 +1,4 @@
-package br.com.serratec.Exceptions;
+package com.example.Eccomerce.Exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

@@ -76,22 +76,20 @@ public class UserService {
 		codigosenha.setUsuario(usuario);
 		Mail emailNovo= new Mail();
 		emailNovo.setAssunto("Troca de Senha.");
-		String text="Seu codigo é "+codigo+". Utilize o metodo POST /cliente/{codigo} para mudar sua senha.";
+		String text="Seu codigo é "+codigo+". Utilize o metodo POST /{role}/{codigo} para mudar sua senha.";
 		emailNovo.setTexto(text);
 		emailNovo.setPara(usuario.getEmail());
 		userRepo.save(usuario);
-		codeService.SalvaCodigo(codigosenha);
+		
 		mailService.createEmail(emailNovo);
 	}
 	@Transactional
 	public void TestarCodigo(Integer id,String codigoteste,String novaSenha) {
 		User usuario= userByID(id);
 		CodigoSenha codigoAchado=codeService.codigoSenhaByCodigo(codigoteste);
-		List<CodigoSenha> list = usuario.getCodigo();
 		if(codigoAchado.getUsuario()==usuario) {
 			usuario.setSenha(novaSenha);
 			codeService.DeleteByCodigo(codigoAchado.getCodigo());
-			usuario.setCodigo(null);
 			userRepo.save(usuario);
 		}else {
 			System.out.println("CODIGO INCORRETO");

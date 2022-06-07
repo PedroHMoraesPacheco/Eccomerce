@@ -1,13 +1,18 @@
 package com.example.Eccomerce.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Eccomerce.DTO.PedidoDTO;
 import com.example.Eccomerce.Exception.PedidoExisteException;
+import com.example.Eccomerce.Exception.PedidoFechadoException;
 import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
 import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Cliente;
@@ -20,13 +25,13 @@ public class PedidoService {
 
 	@Autowired
 	PedidoRepository pedidoR;
-	
+
 	@Autowired
 	ClienteService clienteService;
-	
+
 	@Autowired
 	ProdutoService produtoService;
-	
+
 	@Autowired
 	ProdutoPedidoService produtopedidoS;
 
@@ -44,7 +49,7 @@ public class PedidoService {
 	public void salvarPedido(Pedido pedido) {
 		pedidoR.save(pedido);
 	}
-	
+
 	public List<Pedido> listarTudo() {
 		return pedidoR.findAll();
 	}
@@ -52,7 +57,7 @@ public class PedidoService {
 	// get
 	public Pedido listarPedido(Integer id) throws PedidoNaoEcontradoException {
 		Pedido optional = pedidoR.findById(id).get();
-		if (optional==null) {
+		if (optional == null) {
 			throw new PedidoNaoEcontradoException("O Produto não foi encontrado!");
 		}
 		return optional;
@@ -112,15 +117,43 @@ public class PedidoService {
 
 		return pedidoR.save(pedido);
 	}
-	public Pedido CriarPedido(Integer id, Integer quantidade, String nome) throws ProdutoNotExcepetion, PedidoNaoEcontradoException {
-		Pedido pedido=new Pedido();
+
+	@Transactional
+	public Pedido CriarPedido(Integer id, Integer quantidade, String nome)
+			throws ProdutoNotExcepetion, PedidoNaoEcontradoException {
+		Pedido pedido = new Pedido();
+		pedido.setDataPedido(LocalDate.now());
+		pedido.setStatus("aberto");
 		Cliente cliente = clienteService.findClienteByid(id);
 		pedido.setCliente_id(cliente);
-		Double valorTotal=produtoService.findByName(nome).getPreco()*quantidade;
-		System.out.println(valorTotal);
+		Double valorTotal = produtoService.findByName(nome).getPreco() * quantidade;
 		pedido.setValorTotal(valorTotal);
 		Pedido pedidosaved = pedidoR.save(pedido);
 		produtopedidoS.colocarProduto(pedidosaved.getId(), nome, quantidade);
 		return pedido;
+	}
+
+	@Transactional
+	public Pedido adicionarPedido(Integer idPedido, Integer quantidade, String nome)
+			throws PedidoNaoEcontradoException, PedidoFechadoException, ProdutoNotExcepetion {
+		Pedido pedido = listarPedido(idPedido);
+		if (pedido.getStatus() != "aberto") {
+			throw new PedidoFechadoException("O pedido esta fechado.");
+		} else {
+			Double valorTotal = produtoService.findByName(nome).getPreco() * quantidade;
+			Double valorAntigo = pedido.getValorTotal();
+			pedido.setValorTotal(valorTotal + valorAntigo);
+			Pedido pedidosaved = pedidoR.save(pedido);
+			produtopedidoS.colocarProduto(pedidosaved.getId(), nome, quantidade);
+			return pedido;
+		}
+	}
+
+	public void fecharPedido(Integer id) {
+		Random random = new Random();
+		Pedido pedido = pedidoR.findById(id).get();
+		pedido.setStatus("fechado");
+		pedido.setDataEntrega(LocalDate.now().plusDays(random.nextInt(7 - 1) + 1));
+		pedidoR.save(pedido);
 	}
 }

@@ -68,4 +68,3 @@ public class ClienteController {
 		clienteService.TestarCodigo(id, codigo, senha);
 	}
 }
-

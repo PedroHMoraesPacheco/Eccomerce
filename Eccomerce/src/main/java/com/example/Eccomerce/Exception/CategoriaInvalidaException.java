@@ -1,10 +1,10 @@
-package br.com.serratec.Exceptions;
+package com.example.Eccomerce.Exception;
 
-public class InvalidoCpfException extends Exception {
-
+public class CategoriaInvalidaException extends Exception {
+	
 	private String mensagem;
 
-	public InvalidoCpfException(String mensagem) {
+	public CategoriaInvalidaException(String mensagem) {
 		super();
 		this.mensagem = mensagem;
 	}

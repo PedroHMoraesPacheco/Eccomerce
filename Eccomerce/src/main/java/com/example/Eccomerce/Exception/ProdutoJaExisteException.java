@@ -1,4 +1,4 @@
-package br.com.serratec.Exceptions;
+package com.example.Eccomerce.Exception;
 
 public class ProdutoJaExisteException extends Exception {
 	

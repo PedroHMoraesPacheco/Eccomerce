@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Usuario") 
@@ -20,15 +21,15 @@ public class User{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	
+	@NotNull
 	@Column(name = "Username")
 	private String username;
 	
-	
+	@NotNull
 	@Column(name = "Email")
 	private String email;
 	
-	
+	@NotNull
 	@Column(name = "Senha")
 	private String senha;
 	

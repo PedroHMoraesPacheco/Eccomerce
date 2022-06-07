@@ -1,10 +1,10 @@
-package br.com.serratec.Exceptions;
+package com.example.Eccomerce.Exception;
 
-public class ProdutoNaoEcontradoException extends Exception{
+public class PedidoFechadoException extends Exception {
 	
 	private String mensagem;
 
-	public ProdutoNaoEcontradoException(String mensagem) {
+	public PedidoFechadoException(String mensagem) {
 		super();
 		this.mensagem = mensagem;
 	}

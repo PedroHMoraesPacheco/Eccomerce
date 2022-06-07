@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Eccomerce.DTO.PedidoDTO;
 import com.example.Eccomerce.Exception.PedidoExisteException;
+import com.example.Eccomerce.Exception.PedidoFechadoException;
 import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
 import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Pedido;
@@ -57,5 +58,13 @@ public class PedidoController {
 	@PostMapping("/compra/{id}/{nome}/{quantidade}")
 	public Pedido criarPedido(@PathVariable Integer id,@PathVariable String nome,@PathVariable Integer quantidade) throws ProdutoNotExcepetion, PedidoNaoEcontradoException {
 		return service.CriarPedido(id, quantidade, nome);
+	}
+	@PutMapping("/fechar/{id}")
+	public void fecharPedido(@PathVariable Integer id) {
+		service.fecharPedido(id);
+	}
+	@PostMapping("/adicionar/{id}/{nome}/{quantidade}")
+	public Pedido adicionarProduto(@PathVariable Integer idPedido,@PathVariable String nome,@PathVariable Integer quantidade) throws PedidoNaoEcontradoException, PedidoFechadoException, ProdutoNotExcepetion {
+		return service.adicionarPedido(idPedido, quantidade, nome);
 	}
 }

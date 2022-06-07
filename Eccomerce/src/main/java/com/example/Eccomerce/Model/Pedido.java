@@ -2,6 +2,7 @@ package com.example.Eccomerce.Model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -24,6 +26,7 @@ public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID")
 	private Integer id;
 
 	private Integer numeroPedido;
@@ -31,11 +34,13 @@ public class Pedido {
 	@NotNull
 	private Double valorTotal;
 
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	
+	@DateTimeFormat(pattern = "dd/mm/yyyy")
 	@Column(name = "data_pedido")
 	private LocalDate dataPedido;
 
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@Future
+	@DateTimeFormat(pattern = "dd/mm/yyyy")
 	@Column(name = "data_entrega")
 	private LocalDate dataEntrega;
 	private String status;
@@ -47,7 +52,7 @@ public class Pedido {
 
 	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
 	private List<Produtos_Pedidos> produtoPedido;
-
+	
 	public Pedido() {
 		super();
 	}
@@ -95,6 +100,10 @@ public class Pedido {
 
 	public void setDataEntrega(LocalDate dataEntrega) {
 		this.dataEntrega = dataEntrega;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getStatus() {
