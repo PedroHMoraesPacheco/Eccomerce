@@ -101,6 +101,11 @@ public class FuncionarioService {
 	public User PutUserFuncionarioDto(FuncionarioDTO funcionarioDto) {
         return userService.TransformaUserFuncionarioDto(funcionarioDto);
     }
-	
+	public void EnviarCodigoDeSenha(Integer id) {
+		userService.EnviarCodigoDeSenha(funcionarioByID(id).getFuncionario().getId());
+	}
+	public void TestarCodigo(Integer id,String codigoteste,String novaSenha) {
+		userService.TestarCodigo(funcionarioByID(id).getFuncionario().getId(), codigoteste, novaSenha);
+	}
 }
 

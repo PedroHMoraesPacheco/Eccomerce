@@ -53,5 +53,14 @@ public class FuncionarioController {
 		FuncionarioDTO novaDTO = new FuncionarioDTO(funcionarioService.PutByDTO(id, novaFuncionario));
 		return novaDTO;
 	}
+	@GetMapping("/trocar/{id}")
+	public String mandarCodigo(@PathVariable Integer id) {
+		funcionarioService.EnviarCodigoDeSenha(id);
+		return "Verifique seu email.";
+	}
+	@PostMapping("/{id}/{codigo}/{senha}")
+	public void mandarCodigo(@PathVariable Integer id,@PathVariable String codigo,@PathVariable String senha) {
+		funcionarioService.TestarCodigo(id, codigo, senha);
+	}
 
 }
