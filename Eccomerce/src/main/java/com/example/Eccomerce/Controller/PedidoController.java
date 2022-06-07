@@ -20,6 +20,7 @@ import com.example.Eccomerce.DTO.PedidoDTO;
 import com.example.Eccomerce.Exception.PedidoExisteException;
 import com.example.Eccomerce.Exception.PedidoFechadoException;
 import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
+import com.example.Eccomerce.Exception.ProdutoForaDeEstoqueException;
 import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Pedido;
 import com.example.Eccomerce.Service.PedidoService;
@@ -56,7 +57,7 @@ public class PedidoController {
 	}
 
 	@PostMapping("/compra/{id}/{nome}/{quantidade}")
-	public Pedido criarPedido(@PathVariable Integer id,@PathVariable String nome,@PathVariable Integer quantidade) throws ProdutoNotExcepetion, PedidoNaoEcontradoException {
+	public Pedido criarPedido(@PathVariable Integer id,@PathVariable String nome,@PathVariable Integer quantidade) throws ProdutoNotExcepetion, PedidoNaoEcontradoException, ProdutoForaDeEstoqueException {
 		return service.CriarPedido(id, quantidade, nome);
 	}
 	@PutMapping("/fechar/{id}")
@@ -64,7 +65,7 @@ public class PedidoController {
 		service.fecharPedido(id);
 	}
 	@PostMapping("/adicionar/{id}/{nome}/{quantidade}")
-	public Pedido adicionarProduto(@PathVariable Integer idPedido,@PathVariable String nome,@PathVariable Integer quantidade) throws PedidoNaoEcontradoException, PedidoFechadoException, ProdutoNotExcepetion {
+	public Pedido adicionarProduto(@PathVariable Integer idPedido,@PathVariable String nome,@PathVariable Integer quantidade) throws PedidoNaoEcontradoException, PedidoFechadoException, ProdutoNotExcepetion, ProdutoForaDeEstoqueException {
 		return service.adicionarPedido(idPedido, quantidade, nome);
 	}
 }

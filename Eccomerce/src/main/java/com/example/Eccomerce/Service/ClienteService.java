@@ -35,6 +35,7 @@ public class ClienteService {
 		return clienteRepo.save(novaCliente);
 	}
 	public void deleteById(Integer id){
+		 userService.Delete(findClienteByid(id).getCliente().getId());
 		 clienteRepo.deleteById(id);
 	}
 	public Cliente changeById(Integer id, Cliente novaCliente){

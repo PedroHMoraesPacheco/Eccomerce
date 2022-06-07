@@ -28,6 +28,7 @@ public class FuncionarioService {
 	}
 	
 	public void Delete(Integer id) {
+		userService.Delete(funcionarioByID(id).getFuncionario().getId());
 		repositorio.deleteById(id);
 	}
 	
@@ -108,4 +109,3 @@ public class FuncionarioService {
 		userService.TestarCodigo(funcionarioByID(id).getFuncionario().getId(), codigoteste, novaSenha);
 	}
 }
-

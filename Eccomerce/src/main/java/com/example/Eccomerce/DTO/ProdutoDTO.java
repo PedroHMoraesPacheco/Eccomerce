@@ -1,5 +1,6 @@
 package com.example.Eccomerce.DTO;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.example.Eccomerce.Model.Produto;
@@ -12,7 +13,7 @@ public class ProdutoDTO {
 	private String descricao;
 	private Double preco;
 	private Integer quantidade_estoque;
-	private Date data_cadastro_produto;
+	private LocalDate data_cadastro_produto;
 	private String imagem_url;
 	private Integer categoriaId;
 	private Integer funcionarioId;
@@ -73,11 +74,11 @@ public class ProdutoDTO {
 		this.quantidade_estoque = quantidade_estoque;
 	}
 
-	public Date getData_cadastro_produto() {
+	public LocalDate getData_cadastro_produto() {
 		return data_cadastro_produto;
 	}
 
-	public void setData_cadastro_produto(Date data_cadastro_produto) {
+	public void setData_cadastro_produto(LocalDate data_cadastro_produto) {
 		this.data_cadastro_produto = data_cadastro_produto;
 	}
 

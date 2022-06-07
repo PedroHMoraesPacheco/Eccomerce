@@ -23,10 +23,10 @@ public class EnderecoDTO {
 		this.cep = obj.getCep();
 		this.rua = obj.getLogradouro();
 		this.bairro = obj.getBairro();
-		this.cidade = obj.getCidade();
+		this.cidade = obj.getLocalidade();
 		this.numero = obj.getNumero();
 		this.complemento = obj.getComplemento();
-		this.estado = obj.getEstado();
+		this.estado = obj.getUf();
 	}
 
 	public Integer getId() {

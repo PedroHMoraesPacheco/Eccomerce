@@ -14,6 +14,7 @@ import com.example.Eccomerce.DTO.PedidoDTO;
 import com.example.Eccomerce.Exception.PedidoExisteException;
 import com.example.Eccomerce.Exception.PedidoFechadoException;
 import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
+import com.example.Eccomerce.Exception.ProdutoForaDeEstoqueException;
 import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Cliente;
 import com.example.Eccomerce.Model.Pedido;
@@ -120,7 +121,7 @@ public class PedidoService {
 
 	@Transactional
 	public Pedido CriarPedido(Integer id, Integer quantidade, String nome)
-			throws ProdutoNotExcepetion, PedidoNaoEcontradoException {
+			throws ProdutoNotExcepetion, PedidoNaoEcontradoException, ProdutoForaDeEstoqueException {
 		Pedido pedido = new Pedido();
 		pedido.setDataPedido(LocalDate.now());
 		pedido.setStatus("aberto");
@@ -135,7 +136,7 @@ public class PedidoService {
 
 	@Transactional
 	public Pedido adicionarPedido(Integer idPedido, Integer quantidade, String nome)
-			throws PedidoNaoEcontradoException, PedidoFechadoException, ProdutoNotExcepetion {
+			throws PedidoNaoEcontradoException, PedidoFechadoException, ProdutoNotExcepetion, ProdutoForaDeEstoqueException {
 		Pedido pedido = listarPedido(idPedido);
 		if (pedido.getStatus() != "aberto") {
 			throw new PedidoFechadoException("O pedido esta fechado.");
