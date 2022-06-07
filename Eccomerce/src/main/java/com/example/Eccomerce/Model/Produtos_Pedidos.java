@@ -21,11 +21,11 @@ public class Produtos_Pedidos {
 	
 	@ManyToOne
 	@JoinColumn(name = "produto_id")
-	private Produto produto_id;
+	private Produto produto;
 	
 	@ManyToOne
 	@JoinColumn(name = "pedido_id")
-	private Pedido pedido_id;
+	private Pedido pedido;
 
 	public Produtos_Pedidos() {
 		super();
@@ -35,9 +35,9 @@ public class Produtos_Pedidos {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
-		this.preco = preco;
-		this.produto_id = produto_id;
-		this.pedido_id = pedido_id;
+		this.preco = produto_id.getPreco();
+		this.produto = produto_id;
+		this.pedido = pedido_id;
 	}
 
 	public Integer getQuantidade() {
@@ -57,19 +57,19 @@ public class Produtos_Pedidos {
 	}
 
 	public Produto getProduto_id() {
-		return produto_id;
+		return produto;
 	}
 
 	public void setProduto_id(Produto produto_id) {
-		this.produto_id = produto_id;
+		this.produto = produto_id;
 	}
 
 	public Pedido getPedido_id() {
-		return pedido_id;
+		return pedido;
 	}
 
 	public void setPedido_id(Pedido pedido_id) {
-		this.pedido_id = pedido_id;
+		this.pedido = pedido_id;
 	}
 
 	public Integer getId() {

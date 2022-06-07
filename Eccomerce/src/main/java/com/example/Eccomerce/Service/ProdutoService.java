@@ -34,7 +34,9 @@ public class ProdutoService {
 	public List<Produto> listarTudo(){
 			return repository.findAll();
 	}
-		
+	public void salvarProduto(Produto produto) {
+		repository.save(produto);
+	}
 	public Produto findByName(String nome) throws ProdutoNotExcepetion {
 		Optional<Produto> optional = repository.findByNome(nome);
 		if(optional.isEmpty() ) {
@@ -109,7 +111,6 @@ public class ProdutoService {
 		produto.setData_cadastro_produto(produtodto.getData_cadastro_produto());
 		produto.setFuncionario_id(funciService.funcionarioByID(produtodto.getFuncionarioId()));
 		produto.setCategoria_id(categoriaService.listarCategoria(produtodto.getCategoriaId()));
-		produto.setImagem_id(produto.getImagem_id());
 		produtodto.setImagem_url(imagemService.createUrl(produto.getId()));
 		return produto;
 	}

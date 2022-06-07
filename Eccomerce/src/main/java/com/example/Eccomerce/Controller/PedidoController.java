@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Eccomerce.DTO.PedidoDTO;
 import com.example.Eccomerce.Exception.PedidoExisteException;
 import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
+import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Pedido;
 import com.example.Eccomerce.Service.PedidoService;
 
@@ -53,9 +54,8 @@ public class PedidoController {
 		service.deletarPedido(id);
 	}
 
-	@PostMapping
-	public ResponseEntity<?> insert(@RequestBody PedidoDTO pedido) throws PedidoExisteException {
-		// Transformação de DTO para Pedido no Service.
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	@PostMapping("/compra/{id}/{nome}/{quantidade}")
+	public Pedido criarPedido(@PathVariable Integer id,@PathVariable String nome,@PathVariable Integer quantidade) throws ProdutoNotExcepetion, PedidoNaoEcontradoException {
+		return service.CriarPedido(id, quantidade, nome);
 	}
 }

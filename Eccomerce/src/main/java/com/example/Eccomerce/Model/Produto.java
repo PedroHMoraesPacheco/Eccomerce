@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Produto {
 	
@@ -39,25 +41,23 @@ public class Produto {
 			
 	@OneToOne
 	@JoinColumn(name="categoria_id")
+	
 	private Categoria categoria_Produto;
 
-	@OneToMany(mappedBy = "produto_id",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "produto",cascade = CascadeType.ALL)
 	private List<Produtos_Pedidos> produtoPedido;
 
 	@ManyToOne
 	@JoinColumn(name="funcionario_id")
+	@JsonIgnore
     private Funcionario funcionario_Produto;
-	
-
-	@OneToOne(mappedBy = "produto", cascade = CascadeType.ALL)
-	private Imagem imagem_id;
 	
 	public Produto() {
 		super();
 	}
 
 	public Produto(Integer id, String nome, String descricao, Double preco, Integer quantidade_estoque,
-			Date data_cadastro_produto, Imagem imagem_id, Categoria categoria_id, Funcionario funcionario_id) {
+			Date data_cadastro_produto, Categoria categoria_id, Funcionario funcionario_id) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -65,7 +65,6 @@ public class Produto {
 		this.preco = preco;
 		this.quantidade_estoque = quantidade_estoque;
 		this.data_cadastro_produto = data_cadastro_produto;
-		this.imagem_id = imagem_id;
 		this.categoria_Produto = categoria_id;
 		this.funcionario_Produto = funcionario_id;
 	}
@@ -116,14 +115,6 @@ public class Produto {
 
 	public void setData_cadastro_produto(Date data_cadastro_produto) {
 		this.data_cadastro_produto = data_cadastro_produto;
-	}
-
-	public Imagem getImagem_id() {
-		return imagem_id;
-	}
-
-	public void setImagem_id(Imagem imagem_id) {
-		this.imagem_id = imagem_id;
 	}
 
 	public Categoria getCategoria_id() {

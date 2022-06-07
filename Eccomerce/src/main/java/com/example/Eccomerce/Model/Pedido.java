@@ -13,8 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Pedido {
@@ -23,10 +26,9 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank
 	private Integer numeroPedido;
 
-	@NotBlank
+	@NotNull
 	private Double valorTotal;
 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -40,9 +42,10 @@ public class Pedido {
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
+	@JsonIgnore
 	private Cliente cliente_id;
 
-	@OneToMany(mappedBy = "pedido_id",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
 	private List<Produtos_Pedidos> produtoPedido;
 
 	public Pedido() {

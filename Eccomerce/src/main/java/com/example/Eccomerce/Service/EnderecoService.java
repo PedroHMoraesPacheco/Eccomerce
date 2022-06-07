@@ -1,20 +1,13 @@
 package com.example.Eccomerce.Service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.Eccomerce.DTO.EnderecoDTO;
 import com.example.Eccomerce.Model.Endereco;
 import com.example.Eccomerce.Repository.EnderecoRepository;
-import com.google.gson.Gson;
 
 @Service
 public class EnderecoService {

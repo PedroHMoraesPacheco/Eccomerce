@@ -1,16 +1,15 @@
 package com.example.Eccomerce.Service;
 
 import java.util.List;
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Eccomerce.DTO.ClienteDTO;
-import com.example.Eccomerce.DTO.EnderecoDTO;
+import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
+import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Cliente;
-import com.example.Eccomerce.Model.Endereco;
 import com.example.Eccomerce.Model.Mail;
+import com.example.Eccomerce.Model.Pedido;
 import com.example.Eccomerce.Model.User;
 import com.example.Eccomerce.Repository.ClienteRepository;
 
@@ -119,5 +118,4 @@ public class ClienteService {
 	public void TestarCodigo(Integer id,String codigoteste,String novaSenha) {
 		userService.TestarCodigo(findClienteByid(id).getCliente().getId(), codigoteste, novaSenha);
 	}
-	
 }

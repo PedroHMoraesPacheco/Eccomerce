@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Eccomerce.DTO.ClienteDTO;
+import com.example.Eccomerce.Exception.PedidoNaoEcontradoException;
+import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Cliente;
+import com.example.Eccomerce.Model.Pedido;
 import com.example.Eccomerce.Service.ClienteService;
 
 @RestController
