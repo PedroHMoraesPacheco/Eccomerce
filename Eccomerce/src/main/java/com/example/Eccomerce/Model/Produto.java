@@ -1,5 +1,6 @@
 package com.example.Eccomerce.Model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class Produto {
 	private Integer quantidade_estoque;
 	
 	@NotNull
-	private Date data_cadastro_produto;
+	private LocalDate data_cadastro_produto;
 	
 			
 	@OneToOne
@@ -57,7 +58,7 @@ public class Produto {
 	}
 
 	public Produto(Integer id, String nome, String descricao, Double preco, Integer quantidade_estoque,
-			Date data_cadastro_produto, Categoria categoria_id, Funcionario funcionario_id) {
+			@NotNull LocalDate data_cadastro_produto, Categoria categoria_id, Funcionario funcionario_id) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -109,12 +110,12 @@ public class Produto {
 		this.quantidade_estoque = quantidade_estoque;
 	}
 
-	public Date getData_cadastro_produto() {
+	public @NotNull LocalDate getData_cadastro_produto() {
 		return data_cadastro_produto;
 	}
 
-	public void setData_cadastro_produto(Date data_cadastro_produto) {
-		this.data_cadastro_produto = data_cadastro_produto;
+	public void setData_cadastro_produto(LocalDate localDate) {
+		this.data_cadastro_produto = localDate;
 	}
 
 	public Categoria getCategoria_id() {

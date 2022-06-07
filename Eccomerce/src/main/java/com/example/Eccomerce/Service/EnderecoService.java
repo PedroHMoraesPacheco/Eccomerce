@@ -44,8 +44,8 @@ public class EnderecoService {
 		novoEndereco.setCep(enderecoAux.getCep());
 		novoEndereco.setLogradouro(enderecoAux.getLogradouro());
 		novoEndereco.setBairro(enderecoAux.getBairro());
-		novoEndereco.setCidade(enderecoAux.getCidade());
-		novoEndereco.setEstado(enderecoAux.getEstado());
+		novoEndereco.setLocalidade(enderecoAux.getLocalidade());
+		novoEndereco.setUf(enderecoAux.getUf());
 		
 		novoEndereco.setCliente_id(clienteService.findClienteByid(id));
 		

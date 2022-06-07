@@ -2,6 +2,7 @@ package com.example.Eccomerce.Service;
 
 import java.io.IOException;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,7 @@ public class ProdutoService {
 	
 	public void create(Produto produto, MultipartFile file) throws IOException, ProdutoExisteException {
 		verificarProdutoExiste(produto);
+		produto.setData_cadastro_produto(LocalDate.now());
 		Produto savedProduto = repository.save(produto);
 		imagemService.create(savedProduto, file);
 	}

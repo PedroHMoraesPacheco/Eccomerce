@@ -20,6 +20,7 @@ public class Categoria {
 
 	private String descricao;
 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer numeroCategoria;
 
 	@OneToMany(mappedBy = "categoria_Produto",cascade = CascadeType.ALL)

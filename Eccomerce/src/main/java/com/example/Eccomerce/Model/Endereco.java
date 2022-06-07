@@ -91,12 +91,21 @@ public class Endereco {
 		this.bairro = bairro;
 	}
 
-	public String getCidade() {
+	
+	public String getLocalidade() {
 		return localidade;
 	}
 
-	public void setCidade(String localidade) {
+	public void setLocalidade(String localidade) {
 		this.localidade = localidade;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
 	public String getNumero() {
@@ -113,14 +122,6 @@ public class Endereco {
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
-	}
-
-	public String getEstado() {
-		return uf;
-	}
-
-	public void setEstado(String uf) {
-		this.uf = uf;
 	}
 
 	public Cliente getCliente_id() {
