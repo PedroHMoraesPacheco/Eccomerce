@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.Eccomerce.DTO.EnderecoDTO;
 import com.example.Eccomerce.Model.Endereco;
+import com.example.Eccomerce.Model.User;
 import com.example.Eccomerce.Repository.EnderecoRepository;
 
 @Service
@@ -28,8 +30,14 @@ public class EnderecoService {
 	public void deleteById(Integer id){
 		enderecoRepo.deleteById(id);
 	}
-	public void changeById(Integer id, Endereco novaEndereco) {
-		 	
+	public void changeById(Integer id, EnderecoDTO novaEndereco) {
+		Endereco velhoEndereco = clienteService.findClienteByid(id).getEndereco();
+		velhoEndereco.setBairro(novaEndereco.getBairro());
+		velhoEndereco.setComplemento(novaEndereco.getComplemento());
+		velhoEndereco.setLocalidade(novaEndereco.getCidade());
+		velhoEndereco.setLogradouro(novaEndereco.getRua());
+		velhoEndereco.setNumero(novaEndereco.getNumero());
+		velhoEndereco.setUf(novaEndereco.getEstado());
 	}
 	
 	public Endereco getEnderecoByCep(String cep, Integer id) throws IOException {

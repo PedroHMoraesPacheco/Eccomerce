@@ -50,9 +50,9 @@ public class EnderecoController {
 	}
 	
 	@PutMapping("/{id}")
-	public EnderecoDTO changeById(@PathVariable Integer id, @RequestBody Endereco novaEndereco){
+	public EnderecoDTO changeById(@PathVariable Integer id, @RequestBody EnderecoDTO novaEndereco){
 		enderecoService.changeById(id, novaEndereco);
-		EnderecoDTO novaDTO = new EnderecoDTO(novaEndereco);
+		EnderecoDTO novaDTO = new EnderecoDTO();
 		return novaDTO;
 	}
 }
