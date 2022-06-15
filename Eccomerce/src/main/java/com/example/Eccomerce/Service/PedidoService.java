@@ -138,16 +138,16 @@ public class PedidoService {
 	public Pedido adicionarPedido(Integer idPedido, Integer quantidade, String nome)
 			throws PedidoNaoEcontradoException, PedidoFechadoException, ProdutoNotExcepetion, ProdutoForaDeEstoqueException {
 		Pedido pedido = listarPedido(idPedido);
-		if (pedido.getStatus() != "aberto") {
-			throw new PedidoFechadoException("O pedido esta fechado.");
-		} else {
+		//if (pedido.getStatus() != "aberto") {
+		//	throw new PedidoFechadoException("O pedido esta fechado.");
+		//} else {
 			Double valorTotal = produtoService.findByName(nome).getPreco() * quantidade;
 			Double valorAntigo = pedido.getValorTotal();
 			pedido.setValorTotal(valorTotal + valorAntigo);
 			Pedido pedidosaved = pedidoR.save(pedido);
 			produtopedidoS.colocarProduto(pedidosaved.getId(), nome, quantidade);
 			return pedido;
-		}
+		//}
 	}
 
 	public void fecharPedido(Integer id) {

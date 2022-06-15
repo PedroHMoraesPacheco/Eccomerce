@@ -64,7 +64,7 @@ public class PedidoController {
 	public void fecharPedido(@PathVariable Integer id) {
 		service.fecharPedido(id);
 	}
-	@PostMapping("/adicionar/{id}/{nome}/{quantidade}")
+	@PostMapping("/adicionar/{idPedido}/{nome}/{quantidade}")
 	public Pedido adicionarProduto(@PathVariable Integer idPedido,@PathVariable String nome,@PathVariable Integer quantidade) throws PedidoNaoEcontradoException, PedidoFechadoException, ProdutoNotExcepetion, ProdutoForaDeEstoqueException {
 		return service.adicionarPedido(idPedido, quantidade, nome);
 	}
