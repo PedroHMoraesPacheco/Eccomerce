@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.example.Eccomerce.Exception.ProdutoNotExcepetion;
 import com.example.Eccomerce.Model.Cliente;
 import com.example.Eccomerce.Model.Pedido;
 import com.example.Eccomerce.Service.ClienteService;
+import com.example.Eccomerce.Service.UserService;
 
 @RestController
 @RequestMapping("/cliente")
@@ -28,6 +30,10 @@ public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
 
+	@Autowired
+	UserService userS;
+	
+	@PreAuthorize("hasRole('cliente')")  
 	@GetMapping
 	public List<ClienteDTO> getTodos() {
 		List<Cliente> list = clienteService.RetorneTodos();
