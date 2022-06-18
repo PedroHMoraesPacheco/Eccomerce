@@ -95,4 +95,12 @@ public class UserService {
 			System.out.println("CODIGO INCORRETO");
 		}
 	}
+
+	public User findByUsername(String username) {
+		return userRepo.findByEmail(username).get();
+	}
+
+	public User getUserByEmail(String user) {
+		return userRepo.findByEmail(user).get();
+	}
 }

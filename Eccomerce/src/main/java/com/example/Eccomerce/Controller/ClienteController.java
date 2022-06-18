@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,44 +34,43 @@ public class ClienteController {
 	@Autowired
 	UserService userS;
 	
-	@PreAuthorize("hasRole('cliente')")  
 	@GetMapping
-	public List<ClienteDTO> getTodos() {
+	public List<ClienteDTO> getTodos(){
 		List<Cliente> list = clienteService.RetorneTodos();
 		List<ClienteDTO> listDTO = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
 		return listDTO;
 	}
 
 	@GetMapping("/{id}")
-	public ClienteDTO findByid(@PathVariable Integer id) {
+	public ClienteDTO findByid(@PathVariable Integer id){
 		ClienteDTO novaDTO = new ClienteDTO(clienteService.findClienteByid(id));
 		return novaDTO;
 	}
 
-	@PostMapping
+	@PostMapping("/cadastro")
 	public ClienteDTO newCliente(@RequestBody ClienteDTO novaDto) {
 		clienteService.TransformaDto(novaDto, clienteService.PutUserClienteDto(novaDto));
 		return novaDto;
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteById(@PathVariable Integer id) {
+	public void deleteById(@PathVariable Integer id,@RequestHeader(required = true, name = "Authorization") String token) throws Exception {
 		clienteService.deleteById(id);
 	}
 
 	@PutMapping("/{id}")
-	public ClienteDTO changeById(@PathVariable Integer id, @RequestBody ClienteDTO novaCliente) {
+	public ClienteDTO changeById(@PathVariable Integer id, @RequestBody ClienteDTO novaCliente,@RequestHeader(required = true, name = "Authorization") String token) throws Exception {
 		ClienteDTO novaDTO = new ClienteDTO(clienteService.PutByDTO(id, novaCliente));
 		return novaDTO;
 	}
 
 	@GetMapping("/trocar/{id}")
-	public String mandarCodigo(@PathVariable Integer id) {
+	public String mandarCodigo(@PathVariable Integer id,@RequestHeader(required = true, name = "Authorization") String token) throws Exception {
 		clienteService.EnviarCodigoDeSenha(id);
 		return "Verifique seu email.";
 	}
 	@PostMapping("/{id}/{codigo}/{senha}")
-	public void mandarCodigo(@PathVariable Integer id,@PathVariable String codigo,@PathVariable String senha) {
+	public void mandarCodigo(@PathVariable Integer id,@PathVariable String codigo,@PathVariable String senha,@RequestHeader(required = true, name = "Authorization") String token) throws Exception {
 		clienteService.TestarCodigo(id, codigo, senha);
 	}
 }
