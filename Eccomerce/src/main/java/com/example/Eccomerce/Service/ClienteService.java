@@ -2,6 +2,7 @@ package com.example.Eccomerce.Service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.Eccomerce.DTO.ClienteDTO;
@@ -24,6 +25,9 @@ public class ClienteService {
 	
 	@Autowired
 	MailService mailService;
+	
+	@Autowired
+	BCryptPasswordEncoder bCrypt;
 	
 	public List<Cliente> RetorneTodos(){
 		return clienteRepo.findAll();
@@ -65,10 +69,6 @@ public class ClienteService {
 		novoCliente.setTelefone(velhoDto.getTelefone());
 		novoCliente.setCpf(velhoDto.getCpf());
 		novoCliente.setDataDeNascimento(velhoDto.getData());
-		novoCliente.getCliente().setEmail(velhoDto.getEmail());
-		novoCliente.getCliente().setSenha(velhoDto.getSenha());
-		novoCliente.getCliente().setUsername(velhoDto.getUsername());
-		novoCliente.getCliente().setRole(velhoDto.getRole());
 		
 		clienteRepo.save(novoCliente);
 		EmailNovoCliente(novoCliente);
